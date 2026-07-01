@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { login } from './actions'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -59,7 +60,7 @@ export function LoginForm() {
             />
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="flex flex-col gap-4">
           <Button
             type="submit"
             disabled={isPending}
@@ -74,6 +75,12 @@ export function LoginForm() {
               'Masuk'
             )}
           </Button>
+          <p className="text-center text-sm text-neutral-500">
+            Belum punya akun?{' '}
+            <Link href="/register" className="font-medium text-emerald-500 hover:text-emerald-400 transition-colors">
+              Daftar
+            </Link>
+          </p>
         </CardFooter>
       </form>
     </Card>
