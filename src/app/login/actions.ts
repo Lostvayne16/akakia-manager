@@ -1,5 +1,6 @@
 'use server'
 
+import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 
 export async function login(state: any, formData: FormData) {
@@ -18,18 +19,20 @@ export async function login(state: any, formData: FormData) {
   })
 
   if (error) {
-    // Terjemahkan beberapa pesan kesalahan umum agar ramah pengguna
     let errorMessage = error.message
     if (error.message === 'Invalid login credentials') {
       errorMessage = 'Email atau password salah.'
+    } else if (error.message.includes('Email not confirmed')) {
+      errorMessage = 'Email belum dikonfirmasi. Cek inbox email Anda.'
     }
     return { error: errorMessage }
   }
 
-  return { success: true }
+  redirect('/')
 }
 
 export async function logout() {
   const supabase = await createClient()
   await supabase.auth.signOut()
+  redirect('/login')
 }

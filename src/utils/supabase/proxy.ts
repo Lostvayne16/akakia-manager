@@ -47,6 +47,17 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // Jika pengguna sudah login, cegah akses ke halaman login dan register
+  if (
+    user &&
+    (request.nextUrl.pathname.startsWith('/login') ||
+     request.nextUrl.pathname.startsWith('/register'))
+  ) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/' // atau dashboard utama
+    return NextResponse.redirect(url)
+  }
+
 
   return supabaseResponse
 }

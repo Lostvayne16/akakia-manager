@@ -1,7 +1,6 @@
 'use client'
 
-import { useActionState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useActionState } from 'react'
 import Link from 'next/link'
 import { login } from './actions'
 import { Button } from '@/components/ui/button'
@@ -10,15 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
 export function LoginForm() {
-  const router = useRouter()
   const [state, formAction, isPending] = useActionState(login, null)
-
-  useEffect(() => {
-    if (state?.success) {
-      router.push('/')
-      router.refresh()
-    }
-  }, [state, router])
 
   return (
     <Card className="w-full max-w-md border-neutral-800 bg-neutral-900 text-white shadow-2xl">
@@ -27,7 +18,7 @@ export function LoginForm() {
           Lostvayne
         </CardTitle>
         <CardDescription className="text-neutral-400">
-          Sofa Service Management - Masuk ke Akun Anda
+          Sofa Service Management — Masuk ke Akun Anda
         </CardDescription>
       </CardHeader>
       <form action={formAction}>
