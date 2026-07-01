@@ -25,6 +25,7 @@ export async function register(state: any, formData: FormData) {
       data: {
         full_name: name,
       },
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SUPABASE_URL!.includes('localhost') ? 'http://localhost:3000' : 'https://akakia-manager.vercel.app'}/`,
     },
   })
 
