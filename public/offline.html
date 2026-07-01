@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tidak Ada Koneksi - Lostvayne</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #0a0a0a;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .container {
+      text-align: center;
+      max-width: 360px;
+    }
+    .icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      border: 1px solid #222;
+    }
+    .icon svg { width: 44px; height: 44px; }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+    p {
+      font-size: 0.9rem;
+      color: #737373;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      background: #10b981;
+      color: #fff;
+      border: none;
+      padding: 0.875rem 2rem;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #059669; }
+    .badge {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: #525252;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 6C1 4.9 1.9 4 3 4H9C9.6 4 10 4.4 10 5V8C10 9.1 9.1 10 8 10H5V14H8C9.1 14 10 14.9 10 16V19C10 19.6 9.6 20 9 20H3C1.9 20 1 19.1 1 18V6Z" fill="#10b981" opacity="0.3"/>
+        <path d="M14 6C14 4.9 14.9 4 16 4H21C22.1 4 23 4.9 23 6V18C23 19.1 22.1 20 21 20H16C14.9 20 14 19.1 14 18V6Z" fill="#10b981" opacity="0.3"/>
+        <path d="M1 1L23 23" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h1>Tidak Ada Koneksi</h1>
+    <p>
+      Sepertinya Anda sedang offline. Periksa koneksi internet Anda, lalu coba lagi untuk mengakses <strong>Lostvayne Sofa Service</strong>.
+    </p>
+    <button class="btn" onclick="window.location.reload()">Coba Lagi</button>
+    <p class="badge">Lostvayne Sofa Service Management</p>
+  </div>
+</body>
+</html>
