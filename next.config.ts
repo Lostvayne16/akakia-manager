@@ -1,20 +1,17 @@
 import type { NextConfig } from 'next'
-import withPWAInit from '@ducanh2912/next-pwa'
+import withSerwistInit from '@serwist/next'
 
-const withPWA = withPWAInit({
-  dest: 'public',
-  cacheOnFrontEndNav: true,
-  aggressiveFrontEndNavCaching: true,
-  reloadOnOnline: true,
+const withSerwist = withSerwistInit({
+  swSrc: 'src/app/sw.ts',
+  swDest: 'public/sw.js',
   disable: process.env.NODE_ENV === 'development',
-  fallbacks: {
-    document: '/offline.html',
-  },
-  workboxOptions: {
-    disableDevLogs: true,
-  },
+  additionalPrecacheEntries: [
+    { url: '/offline.html', revision: '1' },
+  ],
 })
 
-const nextConfig: NextConfig = {}
+const nextConfig: NextConfig = {
+  turbopack: {},
+}
 
-export default withPWA(nextConfig)
+export default withSerwist(nextConfig)

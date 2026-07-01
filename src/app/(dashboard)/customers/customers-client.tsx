@@ -117,12 +117,12 @@ export function CustomersClient({ initialCustomers }: { initialCustomers: Custom
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">Daftar Pelanggan</h1>
-          <p className="text-sm text-neutral-400">Kelola informasi kontak pelanggan jasa servis sofa.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">Daftar Pelanggan</h1>
+          <p className="text-sm text-muted-foreground">Kelola informasi kontak pelanggan jasa servis sofa.</p>
         </div>
         <Button
           onClick={openAddDialog}
-          className="bg-emerald-600 hover:bg-emerald-500 text-white gap-2 w-full sm:w-auto"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2 w-full sm:w-auto"
         >
           <Plus className="h-5 w-5" />
           Tambah Pelanggan
@@ -131,12 +131,12 @@ export function CustomersClient({ initialCustomers }: { initialCustomers: Custom
 
       {/* Search Bar */}
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           placeholder="Cari nama atau nomor HP..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-10 border-neutral-800 bg-neutral-900 text-white placeholder-neutral-500 focus-visible:ring-emerald-500"
+          className="pl-10 bg-card border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-ring"
         />
       </div>
 
@@ -144,17 +144,17 @@ export function CustomersClient({ initialCustomers }: { initialCustomers: Custom
       <div className="grid gap-4 sm:grid-cols-2">
         {filteredCustomers.length > 0 ? (
           filteredCustomers.map((customer) => (
-            <Card key={customer.id} className="border-neutral-800 bg-neutral-900 text-white hover:border-neutral-700 transition-colors">
+            <Card key={customer.id} className="bg-card border-border hover:border-primary/30 transition-colors">
               <CardHeader className="pb-3 flex flex-row items-start justify-between space-y-0">
                 <div className="space-y-1">
-                  <span className="text-lg font-semibold block">{customer.name}</span>
+                  <span className="text-lg font-semibold block text-foreground">{customer.name}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Button
                     variant="ghost"
                     size="icon"
                     onClick={() => openEditDialog(customer)}
-                    className="text-neutral-400 hover:text-white h-8 w-8"
+                    className="text-muted-foreground hover:text-foreground h-8 w-8"
                   >
                     <Edit2 className="h-4 w-4" />
                   </Button>
@@ -162,20 +162,20 @@ export function CustomersClient({ initialCustomers }: { initialCustomers: Custom
                     variant="ghost"
                     size="icon"
                     onClick={() => handleDelete(customer.id)}
-                    className="text-red-400 hover:text-red-350 hover:bg-red-950/20 h-8 w-8"
+                    className="text-destructive hover:bg-destructive/10 h-8 w-8"
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-2 text-sm text-neutral-300 pb-4">
+              <CardContent className="space-y-2 text-sm text-muted-foreground pb-4">
                 <div className="flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-emerald-500 flex-shrink-0" />
-                  <a href={`tel:${customer.phone}`} className="hover:underline">{customer.phone}</a>
+                  <Phone className="h-4 w-4 text-primary flex-shrink-0" />
+                  <a href={`tel:${customer.phone}`} className="hover:underline hover:text-primary transition-colors">{customer.phone}</a>
                 </div>
                 {customer.address && (
                   <div className="flex items-start gap-2">
-                    <MapPin className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                    <MapPin className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
                     <span>{customer.address}</span>
                   </div>
                 )}
@@ -183,7 +183,7 @@ export function CustomersClient({ initialCustomers }: { initialCustomers: Custom
             </Card>
           ))
         ) : (
-          <div className="col-span-full py-12 text-center text-neutral-500">
+          <div className="col-span-full py-12 text-center text-muted-foreground">
             Tidak ada pelanggan ditemukan.
           </div>
         )}
@@ -191,18 +191,18 @@ export function CustomersClient({ initialCustomers }: { initialCustomers: Custom
 
       {/* Add/Edit Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="border-neutral-800 bg-neutral-900 text-white max-w-md">
+        <DialogContent className="bg-card border-border text-card-foreground max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold text-emerald-500">
+            <DialogTitle className="text-xl font-bold text-primary">
               {editingCustomer ? 'Ubah Pelanggan' : 'Tambah Pelanggan Baru'}
             </DialogTitle>
-            <DialogDescription className="text-neutral-400">
+            <DialogDescription className="text-muted-foreground">
               Isi data lengkap pelanggan di bawah ini.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-4 py-2">
             {error && (
-              <div className="rounded-lg border border-red-900/50 bg-red-950/50 p-3 text-sm text-red-200">
+              <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-3 text-sm text-destructive">
                 {error}
               </div>
             )}
@@ -214,7 +214,7 @@ export function CustomersClient({ initialCustomers }: { initialCustomers: Custom
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Contoh: Budi Santoso"
                 required
-                className="border-neutral-700 bg-neutral-800 text-white focus-visible:ring-emerald-500"
+                className="bg-input border-border text-foreground focus-visible:ring-ring"
               />
             </div>
             <div className="space-y-2">
@@ -225,7 +225,7 @@ export function CustomersClient({ initialCustomers }: { initialCustomers: Custom
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="Contoh: 08123456789"
                 required
-                className="border-neutral-700 bg-neutral-800 text-white focus-visible:ring-emerald-500"
+                className="bg-input border-border text-foreground focus-visible:ring-ring"
               />
             </div>
             <div className="space-y-2">
@@ -235,7 +235,7 @@ export function CustomersClient({ initialCustomers }: { initialCustomers: Custom
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Contoh: Jl. Sudirman No. 25"
-                className="border-neutral-700 bg-neutral-800 text-white focus-visible:ring-emerald-500"
+                className="bg-input border-border text-foreground focus-visible:ring-ring"
               />
             </div>
             <DialogFooter className="pt-4 flex gap-2 justify-end">
@@ -243,14 +243,14 @@ export function CustomersClient({ initialCustomers }: { initialCustomers: Custom
                 type="button"
                 variant="ghost"
                 onClick={() => setIsDialogOpen(false)}
-                className="text-neutral-400 hover:text-white hover:bg-neutral-800"
+                className="text-muted-foreground hover:text-foreground hover:bg-accent"
               >
                 Batal
               </Button>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="bg-emerald-600 hover:bg-emerald-500 text-white disabled:bg-emerald-800"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground disabled:opacity-50"
               >
                 {isPending ? 'Menyimpan...' : 'Simpan'}
               </Button>

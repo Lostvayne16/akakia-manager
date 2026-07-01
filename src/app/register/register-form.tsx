@@ -17,19 +17,19 @@ export function RegisterForm() {
   // Success state — show confirmation
   if (state?.success) {
     return (
-      <Card className="w-full max-w-md border-neutral-800 bg-neutral-900 text-white shadow-2xl">
+      <Card className="w-full max-w-md bg-card border-border text-card-foreground shadow-2xl">
         <CardHeader className="space-y-4 text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 ring-1 ring-emerald-500/20">
-            <svg className="h-8 w-8 text-emerald-500" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/20">
+            <svg className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
             </svg>
           </div>
-          <CardTitle className="text-xl font-semibold text-white">
+          <CardTitle className="text-xl font-semibold text-foreground">
             Cek Email Anda
           </CardTitle>
-          <CardDescription className="text-neutral-400 leading-relaxed">
+          <CardDescription className="text-muted-foreground leading-relaxed">
             Kami telah mengirimkan link verifikasi ke<br />
-            <span className="font-medium text-emerald-400">{state.email}</span>
+            <span className="font-medium text-primary">{state.email}</span>
             <br /><br />
             Buka link tersebut untuk mengaktifkan akun, lalu kembali ke halaman login.
           </CardDescription>
@@ -37,13 +37,13 @@ export function RegisterForm() {
         <CardFooter className="flex flex-col gap-3">
           <Button
             onClick={() => router.push('/login')}
-            className="w-full bg-emerald-600 font-medium text-white hover:bg-emerald-500"
+            className="w-full bg-primary font-medium text-primary-foreground hover:bg-primary/90"
           >
             Kembali ke Login
           </Button>
           <Link
             href="/login"
-            className="text-sm text-neutral-500 hover:text-emerald-400 transition-colors"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors"
           >
             Sudah punya akun? Masuk
           </Link>
@@ -53,24 +53,24 @@ export function RegisterForm() {
   }
 
   return (
-    <Card className="w-full max-w-md border-neutral-800 bg-neutral-900 text-white shadow-2xl">
+    <Card className="w-full max-w-md bg-card border-border text-card-foreground shadow-2xl">
       <CardHeader className="space-y-1 text-center">
-        <CardTitle className="text-3xl font-bold tracking-tight text-emerald-500">
+        <CardTitle className="text-3xl font-bold tracking-tight text-primary">
           Lostvayne
         </CardTitle>
-        <CardDescription className="text-neutral-400">
+        <CardDescription className="text-muted-foreground">
           Buat Akun Baru
         </CardDescription>
       </CardHeader>
       <form action={formAction}>
         <CardContent className="space-y-4">
           {state?.error && (
-            <div className="rounded-lg border border-red-900/50 bg-red-950/50 p-3 text-sm text-red-200">
+            <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-3 text-sm text-destructive">
               {state.error}
             </div>
           )}
           <div className="space-y-2">
-            <Label htmlFor="name" className="text-neutral-300">
+            <Label htmlFor="name" className="text-muted-foreground">
               Nama Lengkap
             </Label>
             <Input
@@ -79,11 +79,11 @@ export function RegisterForm() {
               type="text"
               placeholder="Masukkan nama lengkap"
               required
-              className="border-neutral-700 bg-neutral-800 text-white placeholder-neutral-500 focus-visible:ring-emerald-500"
+              className="bg-input border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-ring"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-neutral-300">
+            <Label htmlFor="email" className="text-muted-foreground">
               Email
             </Label>
             <Input
@@ -92,11 +92,11 @@ export function RegisterForm() {
               type="email"
               placeholder="admin@lostvayne.com"
               required
-              className="border-neutral-700 bg-neutral-800 text-white placeholder-neutral-500 focus-visible:ring-emerald-500"
+              className="bg-input border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-ring"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-neutral-300">
+            <Label htmlFor="password" className="text-muted-foreground">
               Password
             </Label>
             <div className="relative">
@@ -107,12 +107,12 @@ export function RegisterForm() {
                 placeholder="••••••••"
                 required
                 minLength={6}
-                className="border-neutral-700 bg-neutral-800 pr-10 text-white placeholder-neutral-500 focus-visible:ring-emerald-500"
+                className="bg-input border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-ring pr-10"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 tabIndex={-1}
               >
                 {showPassword ? (
@@ -127,27 +127,27 @@ export function RegisterForm() {
                 )}
               </button>
             </div>
-            <p className="text-xs text-neutral-600">Minimal 6 karakter</p>
+            <p className="text-xs text-muted-foreground">Minimal 6 karakter</p>
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
           <Button
             type="submit"
             disabled={isPending}
-            className="w-full bg-emerald-600 font-medium text-white hover:bg-emerald-500 disabled:bg-emerald-800"
+            className="w-full bg-primary font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
           >
             {isPending ? (
               <span className="flex items-center justify-center gap-2">
-                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent" />
                 Membuat Akun...
               </span>
             ) : (
               'Daftar Sekarang'
             )}
           </Button>
-          <p className="text-center text-sm text-neutral-500">
+          <p className="text-center text-sm text-muted-foreground">
             Sudah punya akun?{' '}
-            <Link href="/login" className="font-medium text-emerald-500 hover:text-emerald-400 transition-colors">
+            <Link href="/login" className="font-medium text-primary hover:text-primary/80 transition-colors">
               Masuk
             </Link>
           </p>

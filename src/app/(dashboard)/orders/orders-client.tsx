@@ -195,15 +195,15 @@ export function OrdersClient({
   const getStatusBadgeStyles = (status: string) => {
     switch (status) {
       case 'Masuk':
-        return 'bg-blue-950/40 text-blue-400 border-blue-900/50'
+        return 'bg-blue-500/10 text-blue-500 border-blue-500/20'
       case 'Dikerjakan':
-        return 'bg-amber-950/40 text-amber-400 border-amber-900/50'
+        return 'bg-amber-500/10 text-amber-500 border-amber-500/20'
       case 'Selesai':
-        return 'bg-emerald-950/40 text-emerald-400 border-emerald-900/50'
+        return 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
       case 'Diambil':
-        return 'bg-purple-950/40 text-purple-400 border-purple-900/50'
+        return 'bg-purple-500/10 text-purple-500 border-purple-500/20'
       default:
-        return 'bg-neutral-800 text-neutral-400 border-neutral-700'
+        return 'bg-muted text-muted-foreground border-border'
     }
   }
 
@@ -211,13 +211,13 @@ export function OrdersClient({
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">Daftar Pesanan</h1>
-          <p className="text-sm text-neutral-400">Kelola status servis sofa, cuci, dan reupholstery.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">Daftar Pesanan</h1>
+          <p className="text-sm text-muted-foreground">Kelola status servis sofa, cuci, dan reupholstery.</p>
         </div>
         <Button
           onClick={openAddDialog}
           disabled={customers.length === 0}
-          className="bg-emerald-600 hover:bg-emerald-500 text-white gap-2 w-full sm:w-auto"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2 w-full sm:w-auto"
         >
           <Plus className="h-5 w-5" />
           Tambah Pesanan
@@ -225,7 +225,7 @@ export function OrdersClient({
       </div>
 
       {customers.length === 0 && (
-        <div className="rounded-lg border border-amber-900/50 bg-amber-950/20 p-4 text-sm text-amber-300">
+        <div className="rounded-lg border border-amber-500/20 bg-amber-500/10 p-4 text-sm text-amber-600 dark:text-amber-400">
           Anda perlu menambahkan minimal 1 pelanggan di halaman <strong>Pelanggan</strong> sebelum dapat membuat pesanan baru.
         </div>
       )}
@@ -233,19 +233,19 @@ export function OrdersClient({
       {/* Filter & Search */}
       <div className="flex flex-col gap-3 sm:flex-row">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Cari nama pelanggan, jenis sofa..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 border-neutral-800 bg-neutral-900 text-white placeholder-neutral-500 focus-visible:ring-emerald-500"
+            className="pl-10 bg-card border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-ring"
           />
         </div>
         <Select value={statusFilter} onValueChange={(val) => setStatusFilter(val || 'Semua')}>
-          <SelectTrigger className="w-full sm:w-[180px] border-neutral-800 bg-neutral-900 text-white focus:ring-emerald-500">
+          <SelectTrigger className="w-full sm:w-[180px] bg-card border-border text-foreground focus:ring-ring">
             <SelectValue placeholder="Status" />
           </SelectTrigger>
-          <SelectContent className="border-neutral-800 bg-neutral-900 text-white">
+          <SelectContent className="bg-popover border-border text-popover-foreground">
             <SelectItem value="Semua">Semua Status</SelectItem>
             <SelectItem value="Masuk">Masuk</SelectItem>
             <SelectItem value="Dikerjakan">Dikerjakan</SelectItem>
@@ -259,14 +259,14 @@ export function OrdersClient({
       <div className="grid gap-4 sm:grid-cols-2">
         {filteredOrders.length > 0 ? (
           filteredOrders.map((order) => (
-            <Card key={order.id} className="border-neutral-800 bg-neutral-900 text-white hover:border-neutral-700 transition-colors">
+            <Card key={order.id} className="bg-card border-border hover:border-primary/30 transition-colors">
               <CardHeader className="pb-3 flex flex-row items-start justify-between space-y-0">
                 <div className="space-y-1">
                   <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold border ${getStatusBadgeStyles(order.status)}`}>
                     {order.status}
                   </span>
-                  <Link href={`/orders/${order.id}`} className="hover:underline hover:text-emerald-400 transition-colors">
-                    <CardTitle className="text-lg font-bold pt-1">{order.sofa_type}</CardTitle>
+                  <Link href={`/orders/${order.id}`} className="hover:underline hover:text-primary transition-colors">
+                    <CardTitle className="text-lg font-bold pt-1 text-foreground">{order.sofa_type}</CardTitle>
                   </Link>
                 </div>
                 <div className="flex items-center gap-1">
@@ -274,7 +274,7 @@ export function OrdersClient({
                     variant="ghost"
                     size="icon"
                     onClick={() => openEditDialog(order)}
-                    className="text-neutral-400 hover:text-white h-8 w-8"
+                    className="text-muted-foreground hover:text-foreground h-8 w-8"
                   >
                     <Edit2 className="h-4 w-4" />
                   </Button>
@@ -282,37 +282,37 @@ export function OrdersClient({
                     variant="ghost"
                     size="icon"
                     onClick={() => handleDelete(order.id)}
-                    className="text-red-400 hover:text-red-350 hover:bg-red-950/20 h-8 w-8"
+                    className="text-destructive hover:bg-destructive/10 h-8 w-8"
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-3 text-sm text-neutral-300 pb-4">
+              <CardContent className="space-y-3 text-sm text-muted-foreground pb-4">
                 <div className="flex items-center gap-2">
-                  <User className="h-4 w-4 text-emerald-500 flex-shrink-0" />
-                  <span className="font-medium text-white">{order.customer.name}</span>
+                  <User className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span className="font-medium text-foreground">{order.customer.name}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Hammer className="h-4 w-4 text-emerald-500 flex-shrink-0" />
-                  <span>Layanan: <strong className="text-white">{order.service_type}</strong></span>
+                  <Hammer className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span>Layanan: <strong className="text-foreground">{order.service_type}</strong></span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CircleDollarSign className="h-4 w-4 text-emerald-500 flex-shrink-0" />
-                  <span className="text-emerald-400 font-semibold">
+                  <CircleDollarSign className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span className="text-primary font-semibold">
                     {formatToRupiah(order.estimated_price.toString())}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-emerald-500 flex-shrink-0" />
-                  <span className="text-neutral-400 text-xs">
+                  <Calendar className="h-4 w-4 text-primary flex-shrink-0" />
+                  <span className="text-muted-foreground text-xs">
                     Masuk: {new Date(order.created_at).toLocaleDateString('id-ID', { dateStyle: 'medium' })}
                   </span>
                 </div>
 
                 {/* Quick Status Control for Mobile */}
-                <div className="border-t border-neutral-800 pt-3 flex flex-wrap gap-2 justify-between items-center">
-                  <span className="text-xs text-neutral-500">Ubah Status:</span>
+                <div className="border-t border-border pt-3 flex flex-wrap gap-2 justify-between items-center">
+                  <span className="text-xs text-muted-foreground">Ubah Status:</span>
                   <div className="flex gap-1">
                     {(['Masuk', 'Dikerjakan', 'Selesai', 'Diambil'] as const).map((st) => (
                       <Button
@@ -322,8 +322,8 @@ export function OrdersClient({
                         onClick={() => handleQuickStatusUpdate(order.id, st)}
                         className={`h-7 px-2 text-[10px] ${
                           order.status === st
-                            ? 'bg-emerald-600 hover:bg-emerald-500 text-white font-semibold'
-                            : 'border-neutral-800 bg-neutral-950 text-neutral-400 hover:text-white'
+                            ? 'bg-primary hover:bg-primary/90 text-primary-foreground font-semibold'
+                            : 'border-border bg-background text-muted-foreground hover:text-foreground'
                         }`}
                       >
                         {st}
@@ -335,7 +335,7 @@ export function OrdersClient({
             </Card>
           ))
         ) : (
-          <div className="col-span-full py-12 text-center text-neutral-500">
+          <div className="col-span-full py-12 text-center text-muted-foreground">
             Tidak ada pesanan ditemukan.
           </div>
         )}
@@ -343,18 +343,18 @@ export function OrdersClient({
 
       {/* Add/Edit Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="border-neutral-800 bg-neutral-900 text-white max-w-md">
+        <DialogContent className="bg-card border-border text-card-foreground max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold text-emerald-500">
+            <DialogTitle className="text-xl font-bold text-primary">
               {editingOrder ? 'Ubah Pesanan' : 'Tambah Pesanan Baru'}
             </DialogTitle>
-            <DialogDescription className="text-neutral-400">
+            <DialogDescription className="text-muted-foreground">
               Masukkan detail pekerjaan servis sofa di bawah ini.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-4 py-2">
             {error && (
-              <div className="rounded-lg border border-red-900/50 bg-red-950/50 p-3 text-sm text-red-200">
+              <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-3 text-sm text-destructive">
                 {error}
               </div>
             )}
@@ -362,10 +362,10 @@ export function OrdersClient({
             <div className="space-y-2">
               <Label htmlFor="customer">Pelanggan</Label>
               <Select value={customerId} onValueChange={(val) => setCustomerId(val || '')}>
-                <SelectTrigger className="border-neutral-700 bg-neutral-800 text-white focus:ring-emerald-500">
+                <SelectTrigger className="bg-input border-border text-foreground focus:ring-ring">
                   <SelectValue placeholder="Pilih Pelanggan" />
                 </SelectTrigger>
-                <SelectContent className="border-neutral-800 bg-neutral-900 text-white">
+                <SelectContent className="bg-popover border-border text-popover-foreground">
                   {customers.map((c) => (
                     <SelectItem key={c.id} value={c.id}>
                       {c.name} ({c.phone})
@@ -383,17 +383,17 @@ export function OrdersClient({
                 onChange={(e) => setSofaType(e.target.value)}
                 placeholder="Contoh: Sofa Bed 3 Seater, Sofa Kulit L"
                 required
-                className="border-neutral-700 bg-neutral-800 text-white focus-visible:ring-emerald-500"
+                className="bg-input border-border text-foreground focus-visible:ring-ring"
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="serviceType">Jenis Layanan</Label>
               <Select value={serviceType} onValueChange={(val) => setServiceType(val || 'Cuci')}>
-                <SelectTrigger className="border-neutral-700 bg-neutral-800 text-white focus:ring-emerald-500">
+                <SelectTrigger className="bg-input border-border text-foreground focus:ring-ring">
                   <SelectValue placeholder="Pilih Layanan" />
                 </SelectTrigger>
-                <SelectContent className="border-neutral-800 bg-neutral-900 text-white">
+                <SelectContent className="bg-popover border-border text-popover-foreground">
                   <SelectItem value="Cuci">Cuci</SelectItem>
                   <SelectItem value="Reupholstery">Reupholstery (Ganti Kulit/Kain)</SelectItem>
                   <SelectItem value="Perbaikan">Perbaikan Rangka/Busa</SelectItem>
@@ -409,17 +409,17 @@ export function OrdersClient({
                 onChange={handlePriceChange}
                 placeholder="Contoh: Rp 1.500.000"
                 required
-                className="border-neutral-700 bg-neutral-800 text-white focus-visible:ring-emerald-500"
+                className="bg-input border-border text-foreground focus-visible:ring-ring"
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="status">Status Awal</Label>
               <Select value={status} onValueChange={(val) => setStatus((val || 'Masuk') as any)}>
-                <SelectTrigger className="border-neutral-700 bg-neutral-800 text-white focus:ring-emerald-500">
+                <SelectTrigger className="bg-input border-border text-foreground focus:ring-ring">
                   <SelectValue placeholder="Pilih Status" />
                 </SelectTrigger>
-                <SelectContent className="border-neutral-800 bg-neutral-900 text-white">
+                <SelectContent className="bg-popover border-border text-popover-foreground">
                   <SelectItem value="Masuk">Masuk</SelectItem>
                   <SelectItem value="Dikerjakan">Dikerjakan</SelectItem>
                   <SelectItem value="Selesai">Selesai</SelectItem>
@@ -433,14 +433,14 @@ export function OrdersClient({
                 type="button"
                 variant="ghost"
                 onClick={() => setIsDialogOpen(false)}
-                className="text-neutral-400 hover:text-white hover:bg-neutral-800"
+                className="text-muted-foreground hover:text-foreground hover:bg-accent"
               >
                 Batal
               </Button>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="bg-emerald-600 hover:bg-emerald-500 text-white disabled:bg-emerald-800"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground disabled:opacity-50"
               >
                 {isPending ? 'Menyimpan...' : 'Simpan'}
               </Button>
