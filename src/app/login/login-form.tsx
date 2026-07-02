@@ -41,6 +41,7 @@ export function LoginForm() {
           <Button
             type="submit"
             formAction={googleAction}
+            formNoValidate
             variant="outline"
             disabled={isGooglePending}
             className="w-full gap-2"
