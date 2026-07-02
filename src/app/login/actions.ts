@@ -31,6 +31,27 @@ export async function login(state: any, formData: FormData) {
   redirect('/')
 }
 
+export async function signInWithGoogle(state: any, formData: FormData) {
+  const supabase = await createClient()
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL!.includes('localhost') ? 'http://localhost:3000' : 'https://akakia-manager.vercel.app'}/auth/callback`,
+    },
+  })
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  if (data.url) {
+    redirect(data.url)
+  }
+
+  return { error: 'Gagal mengarahkan ke Google. Coba lagi.' }
+}
+
 export async function logout() {
   const supabase = await createClient()
   await supabase.auth.signOut()
