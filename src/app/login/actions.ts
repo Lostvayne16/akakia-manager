@@ -28,7 +28,7 @@ export async function login(state: any, formData: FormData) {
     return { error: errorMessage }
   }
 
-  redirect('/')
+  return { success: true }
 }
 
 export async function signInWithGoogle(state: any, formData: FormData) {

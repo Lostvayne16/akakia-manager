@@ -18,7 +18,10 @@ export function LoginForm() {
     if (googleState?.redirectUrl) {
       window.location.href = googleState.redirectUrl
     }
-  }, [googleState])
+    if (state?.success) {
+      window.location.href = '/'
+    }
+  }, [googleState, state])
 
   return (
     <Card className="w-full max-w-md bg-card border-border text-card-foreground shadow-2xl">
