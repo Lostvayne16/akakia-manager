@@ -33,12 +33,18 @@ export async function GET(request: NextRequest) {
     const { error } = await supabase.auth.exchangeCodeForSession(code)
 
     if (!error) {
-      // cookieStore.set() di atas udah nyimpen session cookie di response.
-      // Pakai redirect absolute ke origin supaya cookie ikut terkirim.
-      return NextResponse.redirect(`${origin}${next}`)
+      // exchangeCodeForSession manggil setAll → cookieStore.set() nyimpen session cookie.
+      // Tapi NextResponse.redirect() bikin response baru, jadi cookie gak ikut.
+      // Fix: copy cookies dari cookieStore ke response redirect.
+      const redirectUrl = new URL(`${origin}${next}`)
+      const response = NextResponse.redirect(redirectUrl)
+      cookieStore.getAll().forEach(({ name, value }) => {
+        response.cookies.set(name, value)
+      })
+      return response
     }
   }
 
   // Return error page
-  return NextResponse.redirect(`${origin}/auth/auth-code-error`)
+  return NextResponse.redirect(new URL('/auth/auth-code-error', origin))
 }
