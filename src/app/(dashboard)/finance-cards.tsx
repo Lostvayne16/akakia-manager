@@ -4,15 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ProgressRing } from '@/components/charts/progress-ring'
 
 interface FinanceCardsProps {
-  completedRevenue: number
-  potentialRevenue: number
-  formatCurrency: (amount: number) => string
+  completedRevenue: string
+  potentialRevenue: string
 }
 
 export function FinanceCards({
   completedRevenue,
   potentialRevenue,
-  formatCurrency,
 }: FinanceCardsProps) {
   return (
     <div className="space-y-6">
@@ -22,7 +20,7 @@ export function FinanceCards({
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <p className="text-xs font-medium text-muted-foreground">Paid Invoices</p>
-              <p className="text-xl font-bold text-foreground">{formatCurrency(completedRevenue)}</p>
+              <p className="text-xl font-bold text-foreground">{completedRevenue}</p>
               <p className="text-[11px] text-muted-foreground">Current Financial Year</p>
             </div>
             <ProgressRing
@@ -41,7 +39,7 @@ export function FinanceCards({
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <p className="text-xs font-medium text-muted-foreground">Funds Received</p>
-              <p className="text-xl font-bold text-foreground">{formatCurrency(potentialRevenue)}</p>
+              <p className="text-xl font-bold text-foreground">{potentialRevenue}</p>
               <p className="text-[11px] text-muted-foreground">Current Financial Year</p>
             </div>
             <ProgressRing

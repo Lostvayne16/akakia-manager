@@ -31,6 +31,9 @@ export default async function DashboardPage() {
     }).format(amount).replace('IDR', 'Rp')
   }
 
+  const formattedCompletedRevenue = formatCurrency(completedRevenue)
+  const formattedPotentialRevenue = formatCurrency(potentialRevenue)
+
   return (
     <div className="space-y-6 pb-20 md:pb-0">
       {/* Stats Row */}
@@ -40,9 +43,7 @@ export default async function DashboardPage() {
         totalCustomers={customers.length}
         completedRevenue={completedRevenue}
         potentialRevenue={potentialRevenue}
-        formatCurrency={formatCurrency}
       />
-
       {/* Charts + Finance Cards */}
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
@@ -50,12 +51,10 @@ export default async function DashboardPage() {
           <ActivityChart orders={orders} />
         </div>
         <FinanceCards
-          completedRevenue={completedRevenue}
-          potentialRevenue={potentialRevenue}
-          formatCurrency={formatCurrency}
+          completedRevenue={formattedCompletedRevenue}
+          potentialRevenue={formattedPotentialRevenue}
         />
       </div>
-
       {/* Recent Orders Table */}
       <RecentOrdersTable orders={activeOrders.slice(0, 5)} />
     </div>

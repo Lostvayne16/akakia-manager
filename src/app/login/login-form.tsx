@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState } from 'react'
+import { useActionState, useEffect } from 'react'
 import Link from 'next/link'
 import { login, signInWithGoogle } from './actions'
 import { Button } from '@/components/ui/button'
@@ -13,6 +13,12 @@ import { Mail, Loader2 } from 'lucide-react'
 export function LoginForm() {
   const [state, formAction, isPending] = useActionState(login, null)
   const [googleState, googleAction, isGooglePending] = useActionState(signInWithGoogle, null)
+
+  useEffect(() => {
+    if (googleState?.redirectUrl) {
+      window.location.href = googleState.redirectUrl
+    }
+  }, [googleState])
 
   return (
     <Card className="w-full max-w-md bg-card border-border text-card-foreground shadow-2xl">

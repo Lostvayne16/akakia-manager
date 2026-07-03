@@ -8,7 +8,6 @@ interface DashboardStatsProps {
   totalCustomers: number
   completedRevenue: number
   potentialRevenue: number
-  formatCurrency: (amount: number) => string
 }
 
 function StatCard({
@@ -50,7 +49,6 @@ export function DashboardStats({
   totalCustomers,
   completedRevenue,
   potentialRevenue,
-  formatCurrency,
 }: DashboardStatsProps) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

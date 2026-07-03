@@ -34,10 +34,15 @@ export async function login(state: any, formData: FormData) {
 export async function signInWithGoogle(state: any, formData: FormData) {
   const supabase = await createClient()
 
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL?.includes('localhost')
+      ? 'http://localhost:3000'
+      : process.env.NEXT_PUBLIC_SITE_URL || 'https://akakia-manager.vercel.app'
+
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL!.includes('localhost') ? 'http://localhost:3000' : 'https://akakia-manager.vercel.app'}/auth/callback`,
+      redirectTo: `${siteUrl}/auth/callback`,
     },
   })
 
@@ -45,8 +50,10 @@ export async function signInWithGoogle(state: any, formData: FormData) {
     return { error: error.message }
   }
 
+  // Server Action 'redirect()' cuma ngikutin same-origin URL.
+  // Supabase OAuth URL itu cross-origin, jadi return ke client buat di-navigate manual.
   if (data.url) {
-    redirect(data.url)
+    return { redirectUrl: data.url }
   }
 
   return { error: 'Gagal mengarahkan ke Google. Coba lagi.' }
