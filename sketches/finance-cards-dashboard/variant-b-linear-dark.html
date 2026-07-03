@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linear Style - Finance Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --color-bg: #0c0d0e;
+      --color-text: #f7f8f8;
+      --color-muted: #8a8f98;
+      --color-border: rgba(255, 255, 255, 0.08);
+      --color-accent: #5e6ad2;
+    }
+    body {
+      font-family: 'Geist', system-ui, -apple-system, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+    }
+    .linear-card {
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      backdrop-filter: blur(12px);
+      transition: all 0.2s ease;
+    }
+    .linear-card:hover {
+      border-color: rgba(94, 106, 210, 0.4);
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: 0 0 20px rgba(94, 106, 210, 0.1);
+    }
+    .heading-display {
+      letter-spacing: -0.02em;
+    }
+    .mono-label {
+      font-family: 'Geist Mono', monospace;
+    }
+  </style>
+</head>
+<body class="p-8 min-h-screen flex flex-col justify-center">
+
+  <div class="max-w-4xl mx-auto w-full space-y-6">
+    <div class="flex items-center justify-between border-b border-white/5 pb-4">
+      <div>
+        <h2 class="text-2xl font-semibold heading-display text-white">Variant B: Linear Dark (Sleek & Cyber)</h2>
+        <p class="text-sm text-[#8a8f98]">Deep obsidian layout with neon borders and blur overlays.</p>
+      </div>
+      <span class="mono-label text-xs uppercase bg-[#5e6ad2]/10 text-[#8a99ff] border border-[#5e6ad2]/20 px-2.5 py-1 rounded-full font-medium">Secondary Opl</span>
+    </div>
+
+    <!-- Grid of Finance Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Card 1: Total Pendapatan -->
+      <div class="linear-card p-6 flex flex-col justify-between h-40">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-[#8a8f98] font-medium">Total Pendapatan</span>
+          <span class="mono-label text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded font-medium">+12%</span>
+        </div>
+        <div>
+          <div class="text-3xl font-semibold heading-display tracking-tight text-white">Rp 15.240.000</div>
+          <p class="text-xs text-[#525866] mt-1">Bulan ini (Desember)</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Pesanan Selesai -->
+      <div class="linear-card p-6 flex flex-col justify-between h-40">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-[#8a8f98] font-medium">Pesanan Selesai</span>
+          <span class="mono-label text-[10px] text-[#8a99ff] bg-[#5e6ad2]/10 px-2 py-0.5 rounded font-medium">42 Total</span>
+        </div>
+        <div>
+          <div class="text-3xl font-semibold heading-display tracking-tight text-white">36 Orders</div>
+          <p class="text-xs text-[#525866] mt-1">Selesai dikerjakan</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Pending Balance -->
+      <div class="linear-card p-6 flex flex-col justify-between h-40">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-[#8a8f98] font-medium">Menunggu Pembayaran</span>
+          <span class="mono-label text-[10px] text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded font-medium">12 Unpaid</span>
+        </div>
+        <div>
+          <div class="text-3xl font-semibold heading-display tracking-tight text-white">Rp 4.120.000</div>
+          <p class="text-xs text-[#525866] mt-1">Termasuk DP belum lunas</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

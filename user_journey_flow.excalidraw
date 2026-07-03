@@ -1,0 +1,690 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "hermes-agent",
+  "elements": [
+    {
+      "type": "text",
+      "id": "title",
+      "x": 300,
+      "y": 20,
+      "text": "Akakia Manager - User Flow & Auth Journey",
+      "fontSize": 24,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "originalText": "Akakia Manager - User Flow & Auth Journey",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "zone_auth",
+      "x": 40,
+      "y": 80,
+      "width": 380,
+      "height": 450,
+      "backgroundColor": "#ffd8a8",
+      "fillStyle": "solid",
+      "roundness": {
+        "type": 3
+      },
+      "strokeColor": "#f59e0b",
+      "strokeWidth": 1,
+      "opacity": 30
+    },
+    {
+      "type": "text",
+      "id": "zone_auth_label",
+      "x": 60,
+      "y": 90,
+      "text": "Authentication Phase (Public)",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#f59e0b",
+      "originalText": "Authentication Phase (Public)",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "box_login",
+      "x": 80,
+      "y": 140,
+      "width": 140,
+      "height": 80,
+      "backgroundColor": "#fff3bf",
+      "fillStyle": "solid",
+      "roundness": {
+        "type": 3
+      },
+      "strokeColor": "#f59e0b",
+      "boundElements": [
+        {
+          "id": "t_login",
+          "type": "text"
+        },
+        {
+          "id": "arrow_login_oauth",
+          "type": "arrow"
+        },
+        {
+          "id": "arrow_login_dashboard",
+          "type": "arrow"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "t_login",
+      "x": 85,
+      "y": 160,
+      "width": 130,
+      "height": 40,
+      "text": "/login\n(Email & Google)",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "box_login",
+      "originalText": "/login\n(Email & Google)",
+      "autoResize": true
+    },
+    {
+      "type": "ellipse",
+      "id": "box_oauth_provider",
+      "x": 280,
+      "y": 140,
+      "width": 110,
+      "height": 80,
+      "backgroundColor": "#ffc9c9",
+      "fillStyle": "solid",
+      "strokeColor": "#ef4444",
+      "boundElements": [
+        {
+          "id": "t_oauth",
+          "type": "text"
+        },
+        {
+          "id": "arrow_login_oauth",
+          "type": "arrow"
+        },
+        {
+          "id": "arrow_oauth_callback",
+          "type": "arrow"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "t_oauth",
+      "x": 285,
+      "y": 160,
+      "width": 100,
+      "height": 40,
+      "text": "Google OAuth\nProvider",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "box_oauth_provider",
+      "originalText": "Google OAuth\nProvider",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "box_callback",
+      "x": 160,
+      "y": 300,
+      "width": 200,
+      "height": 90,
+      "backgroundColor": "#d0bfff",
+      "fillStyle": "solid",
+      "roundness": {
+        "type": 3
+      },
+      "strokeColor": "#8b5cf6",
+      "boundElements": [
+        {
+          "id": "t_callback",
+          "type": "text"
+        },
+        {
+          "id": "arrow_oauth_callback",
+          "type": "arrow"
+        },
+        {
+          "id": "arrow_callback_dashboard",
+          "type": "arrow"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "t_callback",
+      "x": 165,
+      "y": 315,
+      "width": 190,
+      "height": 60,
+      "text": "/auth/callback\n(Exchange Code & \nInject Cookie to Redirect)",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "box_callback",
+      "originalText": "/auth/callback\n(Exchange Code & \nInject Cookie to Redirect)",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "zone_dashboard",
+      "x": 480,
+      "y": 80,
+      "width": 380,
+      "height": 450,
+      "backgroundColor": "#d3f9d8",
+      "fillStyle": "solid",
+      "roundness": {
+        "type": 3
+      },
+      "strokeColor": "#22c55e",
+      "strokeWidth": 1,
+      "opacity": 30
+    },
+    {
+      "type": "text",
+      "id": "zone_dash_label",
+      "x": 500,
+      "y": 90,
+      "text": "Protected Dashboard Group",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#15803d",
+      "originalText": "Protected Dashboard Group",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "box_dashboard",
+      "x": 520,
+      "y": 140,
+      "width": 140,
+      "height": 80,
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "solid",
+      "roundness": {
+        "type": 3
+      },
+      "strokeColor": "#4a9eed",
+      "boundElements": [
+        {
+          "id": "t_dash",
+          "type": "text"
+        },
+        {
+          "id": "arrow_callback_dashboard",
+          "type": "arrow"
+        },
+        {
+          "id": "arrow_dash_settings",
+          "type": "arrow"
+        },
+        {
+          "id": "arrow_login_dashboard",
+          "type": "arrow"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "t_dash",
+      "x": 525,
+      "y": 160,
+      "width": 130,
+      "height": 40,
+      "text": "Dashboard (/)\n(Show stats/orders)",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "box_dashboard",
+      "originalText": "Dashboard (/)\n(Show stats/orders)",
+      "autoResize": true
+    },
+    {
+      "type": "rectangle",
+      "id": "box_settings",
+      "x": 700,
+      "y": 140,
+      "width": 140,
+      "height": 80,
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "solid",
+      "roundness": {
+        "type": 3
+      },
+      "strokeColor": "#4a9eed",
+      "boundElements": [
+        {
+          "id": "t_settings",
+          "type": "text"
+        },
+        {
+          "id": "arrow_dash_settings",
+          "type": "arrow"
+        },
+        {
+          "id": "arrow_logout",
+          "type": "arrow"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "t_settings",
+      "x": 705,
+      "y": 160,
+      "width": 130,
+      "height": 40,
+      "text": "/settings\n(User Profile & App)",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "box_settings",
+      "originalText": "/settings\n(User Profile & App)",
+      "autoResize": true
+    },
+    {
+      "type": "diamond",
+      "id": "box_middleware",
+      "x": 400,
+      "y": 280,
+      "width": 100,
+      "height": 80,
+      "backgroundColor": "#e8ebed",
+      "fillStyle": "solid",
+      "strokeColor": "#757575",
+      "boundElements": [
+        {
+          "id": "t_middleware",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "t_middleware",
+      "x": 405,
+      "y": 300,
+      "width": 90,
+      "height": 40,
+      "text": "Middleware\nAuth Check",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "strokeColor": "#1e1e1e",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "box_middleware",
+      "originalText": "Middleware\nAuth Check",
+      "autoResize": true
+    },
+    {
+      "type": "arrow",
+      "id": "arrow_login_oauth",
+      "x": 220,
+      "y": 180,
+      "width": 60,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          60,
+          0
+        ]
+      ],
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "box_login",
+        "fixedPoint": [
+          1,
+          0.5
+        ]
+      },
+      "endBinding": {
+        "elementId": "box_oauth_provider",
+        "fixedPoint": [
+          0,
+          0.5
+        ]
+      },
+      "boundElements": [
+        {
+          "id": "t_login_oauth",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "t_login_oauth",
+      "x": 230,
+      "y": 160,
+      "width": 40,
+      "height": 16,
+      "text": "OAuth",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "strokeColor": "#757575",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "arrow_login_oauth",
+      "originalText": "OAuth",
+      "autoResize": true
+    },
+    {
+      "type": "arrow",
+      "id": "arrow_oauth_callback",
+      "x": 335,
+      "y": 220,
+      "width": -75,
+      "height": 80,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -75,
+          80
+        ]
+      ],
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "box_oauth_provider",
+        "fixedPoint": [
+          0.5,
+          1
+        ]
+      },
+      "endBinding": {
+        "elementId": "box_callback",
+        "fixedPoint": [
+          0.5,
+          0
+        ]
+      },
+      "boundElements": [
+        {
+          "id": "t_oauth_callback",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "t_oauth_callback",
+      "x": 310,
+      "y": 250,
+      "width": 50,
+      "height": 16,
+      "text": "Redirect",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "strokeColor": "#757575",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "arrow_oauth_callback",
+      "originalText": "Redirect",
+      "autoResize": true
+    },
+    {
+      "type": "arrow",
+      "id": "arrow_callback_dashboard",
+      "x": 360,
+      "y": 345,
+      "width": 230,
+      "height": -125,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          230,
+          -125
+        ]
+      ],
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "box_callback",
+        "fixedPoint": [
+          1,
+          0.5
+        ]
+      },
+      "endBinding": {
+        "elementId": "box_dashboard",
+        "fixedPoint": [
+          0.5,
+          1
+        ]
+      },
+      "boundElements": [
+        {
+          "id": "t_callback_dash",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "t_callback_dash",
+      "x": 420,
+      "y": 235,
+      "width": 110,
+      "height": 30,
+      "text": "Set-Cookie &\nRedirect to Dashboard",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "strokeColor": "#757575",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "arrow_callback_dashboard",
+      "originalText": "Set-Cookie &\nRedirect to Dashboard",
+      "autoResize": true
+    },
+    {
+      "type": "arrow",
+      "id": "arrow_login_dashboard",
+      "x": 150,
+      "y": 220,
+      "width": 440,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          240
+        ],
+        [
+          370,
+          240
+        ],
+        [
+          370,
+          0
+        ]
+      ],
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "box_login",
+        "fixedPoint": [
+          0.5,
+          1
+        ]
+      },
+      "endBinding": {
+        "elementId": "box_dashboard",
+        "fixedPoint": [
+          0.5,
+          1
+        ]
+      },
+      "boundElements": [
+        {
+          "id": "t_login_dash",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "t_login_dash",
+      "x": 250,
+      "y": 420,
+      "width": 140,
+      "height": 30,
+      "text": "Client-side redirect /\nCookie set directly",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "strokeColor": "#757575",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "arrow_login_dashboard",
+      "originalText": "Client-side redirect /\nCookie set directly",
+      "autoResize": true
+    },
+    {
+      "type": "arrow",
+      "id": "arrow_dash_settings",
+      "x": 660,
+      "y": 180,
+      "width": 40,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          40,
+          0
+        ]
+      ],
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "box_dashboard",
+        "fixedPoint": [
+          1,
+          0.5
+        ]
+      },
+      "endBinding": {
+        "elementId": "box_settings",
+        "fixedPoint": [
+          0,
+          0.5
+        ]
+      },
+      "boundElements": [
+        {
+          "id": "t_dash_settings",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "t_dash_settings",
+      "x": 670,
+      "y": 160,
+      "width": 20,
+      "height": 16,
+      "text": "Go",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "strokeColor": "#757575",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "arrow_dash_settings",
+      "originalText": "Go",
+      "autoResize": true
+    },
+    {
+      "type": "arrow",
+      "id": "arrow_logout",
+      "x": 770,
+      "y": 220,
+      "width": -620,
+      "height": 260,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          260
+        ],
+        [
+          -620,
+          260
+        ],
+        [
+          -620,
+          0
+        ]
+      ],
+      "endArrowhead": "arrow",
+      "startBinding": {
+        "elementId": "box_settings",
+        "fixedPoint": [
+          0.5,
+          1
+        ]
+      },
+      "endBinding": {
+        "elementId": "box_login",
+        "fixedPoint": [
+          0.5,
+          1
+        ]
+      },
+      "boundElements": [
+        {
+          "id": "t_logout_label",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "t_logout_label",
+      "x": 400,
+      "y": 460,
+      "width": 140,
+      "height": 30,
+      "text": "Sign Out &\nRedirect to Login",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "strokeColor": "#757575",
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "arrow_logout",
+      "originalText": "Sign Out &\nRedirect to Login",
+      "autoResize": true
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff"
+  }
+}

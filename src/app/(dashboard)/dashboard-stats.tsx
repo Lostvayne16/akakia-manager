@@ -24,17 +24,17 @@ function StatCard({
   iconColor: string
 }) {
   return (
-    <Card className="bg-card border-border">
+    <Card className="bg-[#161720] border-white/10 hover:border-white/20 transition-all hover:shadow-[0_0_20px_rgba(94,106,210,0.15)]">
       <CardContent className="p-4">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
-            <p className="text-xs font-medium text-muted-foreground">{title}</p>
-            <p className="text-2xl font-bold text-foreground">{value}</p>
+            <p className="text-xs font-medium text-[#8a8f98]">{title}</p>
+            <p className="text-2xl font-bold text-white">{value}</p>
             {subtitle && (
-              <p className="text-[11px] text-muted-foreground">{subtitle}</p>
+              <p className="text-[11px] text-[#525866]">{subtitle}</p>
             )}
           </div>
-          <div className="rounded-lg bg-primary/10 p-2">
+          <div className="rounded-lg bg-[#5e6ad2]/10 p-2">
             <Icon className={`h-4 w-4 ${iconColor}`} />
           </div>
         </div>
@@ -57,45 +57,45 @@ export function DashboardStats({
         value={activeOrders}
         subtitle="Active in queue"
         icon={ClipboardList}
-        iconColor="text-[var(--chart-2)]"
+        iconColor="text-[#3b82f6]"
       />
       <StatCard
         title="Approved"
         value={completedOrders}
         subtitle="Completed orders"
         icon={CheckCircle2}
-        iconColor="text-[var(--chart-1)]"
+        iconColor="text-[#10b981]"
       />
-      <Card className="bg-card border-border">
+      <Card className="bg-[#161720] border-white/10 hover:border-white/20 transition-all hover:shadow-[0_0_20px_rgba(94,106,210,0.15)]">
         <CardContent className="p-4">
           <div className="flex items-start justify-between">
             <div className="space-y-1">
-              <p className="text-xs font-medium text-muted-foreground">Users</p>
-              <p className="text-2xl font-bold text-foreground">{totalCustomers}</p>
-              <p className="text-[11px] text-muted-foreground">Total customers</p>
+              <p className="text-xs font-medium text-[#8a8f98]">Users</p>
+              <p className="text-2xl font-bold text-white">{totalCustomers}</p>
+              <p className="text-[11px] text-[#525866]">Total customers</p>
             </div>
             <DonutChart
               value={totalCustomers}
               total={totalCustomers + 50}
-              color="var(--chart-2)"
+              color="#3b82f6"
               size={56}
               strokeWidth={8}
             />
           </div>
         </CardContent>
       </Card>
-      <Card className="bg-card border-border">
+      <Card className="bg-[#161720] border-white/10 hover:border-white/20 transition-all hover:shadow-[0_0_20px_rgba(94,106,210,0.15)]">
         <CardContent className="p-4">
           <div className="flex items-start justify-between">
             <div className="space-y-1">
-              <p className="text-xs font-medium text-muted-foreground">Subscriptions</p>
-              <p className="text-2xl font-bold text-foreground">{completedOrders}</p>
-              <p className="text-[11px] text-muted-foreground">Completed orders</p>
+              <p className="text-xs font-medium text-[#8a8f98]">Subscriptions</p>
+              <p className="text-2xl font-bold text-white">{completedOrders}</p>
+              <p className="text-[11px] text-[#525866]">Completed orders</p>
             </div>
             <DonutChart
               value={completedOrders}
               total={completedOrders + activeOrders}
-              color="var(--chart-3)"
+              color="#10b981"
               size={56}
               strokeWidth={8}
             />

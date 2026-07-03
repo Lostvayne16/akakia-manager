@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vercel Style - Finance Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-text: #171717;
+      --color-muted: #666666;
+      --color-border-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    }
+    body {
+      font-family: 'Geist', system-ui, -apple-system, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+    }
+    .vercel-card {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px, 
+        rgba(0, 0, 0, 0.04) 0px 2px 2px, 
+        rgba(0, 0, 0, 0.04) 0px 8px 8px -8px, 
+        #fafafa 0px 0px 0px 1px;
+      transition: box-shadow 0.2s ease;
+    }
+    .vercel-card:hover {
+      box-shadow: 
+        rgba(0, 0, 0, 0.12) 0px 0px 0px 1px, 
+        rgba(0, 0, 0, 0.08) 0px 4px 6px, 
+        rgba(0, 0, 0, 0.04) 0px 12px 12px -8px, 
+        #fafafa 0px 0px 0px 1px;
+    }
+    .heading-display {
+      letter-spacing: -0.96px;
+    }
+    .mono-label {
+      font-family: 'Geist Mono', monospace;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body class="p-8 bg-gray-50/50 min-h-screen flex flex-col justify-center">
+
+  <div class="max-w-4xl mx-auto w-full space-y-6">
+    <div class="flex items-center justify-between border-b pb-4">
+      <div>
+        <h2 class="text-2xl font-semibold heading-display">Variant A: Vercel White (Airy & Structured)</h2>
+        <p class="text-sm text-gray-500">Monochromatic layout with shadow-as-borders and Geist typography.</p>
+      </div>
+      <span class="mono-label text-xs uppercase bg-[#ebf5ff] text-[#0068d6] px-2.5 py-1 rounded-full font-medium">Verified Active</span>
+    </div>
+
+    <!-- Grid of Finance Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Card 1: Total Pendapatan -->
+      <div class="vercel-card p-6 flex flex-col justify-between h-40">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-500 font-medium">Total Pendapatan</span>
+          <span class="mono-label text-[10px] text-green-600 bg-green-50 px-2 py-0.5 rounded font-medium">+12%</span>
+        </div>
+        <div>
+          <div class="text-3xl font-semibold heading-display tracking-tight text-[#171717]">Rp 15.240.000</div>
+          <p class="text-xs text-gray-400 mt-1">Bulan ini (Desember)</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Pesanan Selesai -->
+      <div class="vercel-card p-6 flex flex-col justify-between h-40">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-500 font-medium">Pesanan Selesai</span>
+          <span class="mono-label text-[10px] text-blue-600 bg-blue-50 px-2 py-0.5 rounded font-medium">42 Total</span>
+        </div>
+        <div>
+          <div class="text-3xl font-semibold heading-display tracking-tight text-[#171717]">36 Orders</div>
+          <p class="text-xs text-gray-400 mt-1">Selesai dikerjakan</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Pending Balance -->
+      <div class="vercel-card p-6 flex flex-col justify-between h-40">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-500 font-medium">Menunggu Pembayaran</span>
+          <span class="mono-label text-[10px] text-orange-600 bg-orange-50 px-2 py-0.5 rounded font-medium">12 Unpaid</span>
+        </div>
+        <div>
+          <div class="text-3xl font-semibold heading-display tracking-tight text-[#171717]">Rp 4.120.000</div>
+          <p class="text-xs text-gray-400 mt-1">Termasuk DP belum lunas</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
