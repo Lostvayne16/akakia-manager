@@ -9,7 +9,7 @@ const inter = Inter({
 })
 
 export const viewport: Viewport = {
-  themeColor: '#10b981',
+  themeColor: '#0c0d0e',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -17,17 +17,18 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'Lostvayne Sofa Service',
-  description: 'Aplikasi Manajemen Operasional Jasa Servis Sofa - Lostvayne System',
+  title: 'Akakia Manager',
+  description: 'Aplikasi Manajemen Operasional Jasa Servis Sofa - Akakia Manager',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'Lostvayne',
+    title: 'Akakia Manager',
   },
   icons: {
-    icon: '/icon-192x192.png',
-    apple: '/icon-192x192.png',
+    icon: '/icon-192.png',
+    apple: '/icon-192.png',
   },
+  manifest: '/manifest.json',
 }
 
 export default function RootLayout({
@@ -36,35 +37,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="id"
-      className={`${inter.variable} h-full antialiased`}
-      suppressHydrationWarning
-    >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('theme');
-                  if (theme === 'light' || theme === 'dark') {
-                    document.documentElement.classList.add(theme);
-                  } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-                    document.documentElement.classList.add('light');
-                  } else {
-                    document.documentElement.classList.add('dark');
-                  }
-                } catch(e) {}
-              })();
-            `,
-          }}
-        />
-      </head>
-      <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+    <html lang="id" suppressHydrationWarning>
+      <body className={`${inter.variable} antialiased`}>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )

@@ -2,27 +2,25 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Lostvayne Sofa Service',
-    short_name: 'Lostvayne',
-    description: 'Aplikasi Manajemen Servis Sofa - Lostvayne System',
+    name: 'Akakia Manager',
+    short_name: 'Akakia',
+    description: 'Aplikasi Manajemen Servis Sofa - Akakia Manager',
     start_url: '/',
     display: 'standalone',
     orientation: 'portrait',
-    background_color: '#0a0a0a',
-    theme_color: '#10b981',
+    theme_color: '#0c0d0e',
+    background_color: '#0c0d0e',
     lang: 'id',
     icons: [
       {
-        src: '/icon-192x192.png',
+        src: '/icon-192.png',
         sizes: '192x192',
         type: 'image/png',
-        purpose: 'any',
       },
       {
-        src: '/icon-512x512.png',
+        src: '/icon-512.png',
         sizes: '512x512',
         type: 'image/png',
-        purpose: 'maskable',
       },
     ],
     categories: ['business', 'productivity'],
@@ -30,12 +28,12 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         name: 'Daftar Pesanan',
         url: '/orders',
-        icons: [{ src: '/icon-192x192.png', sizes: '192x192' }],
+        icons: [{ src: '/icon-192.png', sizes: '192x192' }],
       },
       {
         name: 'Daftar Pelanggan',
         url: '/customers',
-        icons: [{ src: '/icon-192x192.png', sizes: '192x192' }],
+        icons: [{ src: '/icon-192.png', sizes: '192x192' }],
       },
     ],
   }

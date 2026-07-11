@@ -1,8 +1,8 @@
 import { LoginForm } from './login-form'
 
 export const metadata = {
-  title: 'Login - Lostvayne Sofa Service',
-  description: 'Masuk ke sistem manajemen servis sofa Lostvayne.',
+  title: 'Login - Akakia Manager',
+  description: 'Masuk ke sistem manajemen servis sofa Akakia.',
 }
 
 export default function LoginPage() {

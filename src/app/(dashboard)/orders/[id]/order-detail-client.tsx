@@ -63,7 +63,7 @@ export function OrderDetailClient({ order: initialOrder }: { order: Order }) {
       clean = '62' + clean.slice(1)
     }
     const message = encodeURIComponent(
-      `Halo Bapak/Ibu ${name}, kami dari Lostvayne Sofa Service ingin menginfokan bahwa pesanan servis Anda (${sofa}) saat ini berstatus: *${order.status}*.`
+      `Halo Bapak/Ibu ${name}, kami dari Akakia Manager ingin menginfokan bahwa pesanan servis Anda (${sofa}) saat ini berstatus: *${order.status}*.`
     )
     return `https://wa.me/${clean}?text=${message}`
   }

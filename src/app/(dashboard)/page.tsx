@@ -1,62 +1,80 @@
-import { getOrders } from './orders/actions'
-import { getCustomers } from './customers/actions'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { DashboardStats } from './dashboard-stats'
-import { SalesChart } from './sales-chart'
-import { ActivityChart } from './activity-chart'
+import Link from 'next/link'
+import { Plus, Receipt } from 'lucide-react'
+import {
+  getDashboardStats,
+  getPiutangTotal,
+  getOrderStatusBreakdown,
+  getRecentOrders,
+  getMonthlyRevenueTrend,
+} from './actions'
 import { FinanceCards } from './finance-cards'
-import { RecentOrdersTable } from './recent-orders-table'
+import { PiutangCard } from './piutang-card'
+import { StatusBreakdown } from './status-breakdown'
+import { IncomeChart } from './income-chart'
+import { RecentOrdersList } from './recent-orders-list'
 
 export const dynamic = 'force-dynamic'
 
 export default async function DashboardPage() {
-  const [orders, customers] = await Promise.all([getOrders(), getCustomers()])
-
-  const activeOrders = orders.filter((o) => o.status === 'Masuk' || o.status === 'Dikerjakan')
-  const completedOrders = orders.filter((o) => o.status === 'Selesai' || o.status === 'Diambil')
-
-  const completedRevenue = completedOrders.reduce(
-    (sum, o) => sum + Number(o.estimated_price), 0
-  )
-  const potentialRevenue = activeOrders.reduce(
-    (sum, o) => sum + Number(o.estimated_price), 0
-  )
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount).replace('IDR', 'Rp')
-  }
-
-  const formattedCompletedRevenue = formatCurrency(completedRevenue)
-  const formattedPotentialRevenue = formatCurrency(potentialRevenue)
+  const [stats, piutang, statusBreakdown, recentOrders, revenueTrend] =
+    await Promise.all([
+      getDashboardStats(),
+      getPiutangTotal(),
+      getOrderStatusBreakdown(),
+      getRecentOrders(5),
+      getMonthlyRevenueTrend(),
+    ])
 
   return (
     <div className="space-y-6 pb-20 md:pb-0">
-      {/* Stats Row */}
-      <DashboardStats
-        activeOrders={activeOrders.length}
-        completedOrders={completedOrders.length}
-        totalCustomers={customers.length}
-        completedRevenue={completedRevenue}
-        potentialRevenue={potentialRevenue}
+      {/* 1. Quick action buttons */}
+      <div className="flex flex-wrap gap-3">
+        <Link
+          href="/orders"
+          className="flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+        >
+          <Plus className="h-4 w-4" />
+          Pesanan Baru
+        </Link>
+        <Link
+          href="/expenses"
+          className="flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted/40"
+        >
+          <Receipt className="h-4 w-4" />
+          Catat Pengeluaran
+        </Link>
+      </div>
+
+      {/* 2. Finance cards */}
+      <FinanceCards
+        totalPendapatan={stats.totalPendapatan}
+        totalPengeluaran={stats.totalPengeluaran}
+        untungRugi={stats.untungRugi}
       />
-      {/* Charts + Finance Cards */}
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2 space-y-6">
-          <SalesChart orders={orders} />
-          <ActivityChart orders={orders} />
-        </div>
-        <FinanceCards
-          completedRevenue={formattedCompletedRevenue}
-          potentialRevenue={formattedPotentialRevenue}
+
+      {/* 3. Piutang card */}
+      <PiutangCard
+        totalPiutang={piutang.totalPiutang}
+        orderCount={piutang.orderCount}
+      />
+
+      {/* 4. Status breakdown */}
+      <div className="rounded-2xl border border-border bg-card p-4">
+        <p className="mb-2 text-xs font-medium text-muted-foreground">
+          Status Pesanan
+        </p>
+        <StatusBreakdown
+          masuk={statusBreakdown.masuk}
+          dikerjakan={statusBreakdown.dikerjakan}
+          selesai={statusBreakdown.selesai}
         />
       </div>
-      {/* Recent Orders Table */}
-      <RecentOrdersTable orders={activeOrders.slice(0, 5)} />
+
+      {/* 5. Income chart */}
+      <IncomeChart data={revenueTrend} />
+
+      {/* 6. Recent orders */}
+      <RecentOrdersList orders={recentOrders} />
     </div>
   )
 }

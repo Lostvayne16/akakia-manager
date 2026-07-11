@@ -3,35 +3,12 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 
-export async function login(state: any, formData: FormData) {
-  const email = formData.get('email') as string
-  const password = formData.get('password') as string
+type GoogleState = { error?: string; redirectUrl?: string } | null
 
-  if (!email || !password) {
-    return { error: 'Email dan password wajib diisi.' }
-  }
-
-  const supabase = await createClient()
-
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  })
-
-  if (error) {
-    let errorMessage = error.message
-    if (error.message === 'Invalid login credentials') {
-      errorMessage = 'Email atau password salah.'
-    } else if (error.message.includes('Email not confirmed')) {
-      errorMessage = 'Email belum dikonfirmasi. Cek inbox email Anda.'
-    }
-    return { error: errorMessage }
-  }
-
-  return { success: true }
-}
-
-export async function signInWithGoogle(state: any, formData: FormData) {
+export async function signInWithGoogle(
+  state: GoogleState,
+  formData: FormData,
+): Promise<GoogleState> {
   const supabase = await createClient()
 
   const siteUrl =

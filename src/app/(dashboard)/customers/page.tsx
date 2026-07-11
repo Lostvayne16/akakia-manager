@@ -1,14 +1,17 @@
-import { getCustomers } from './actions'
-import { CustomersClient } from './customers-client'
+import { getCustomers, getCustomerOrderCounts } from './actions'
+import CustomersList from './customers-list'
 
 export const dynamic = 'force-dynamic'
 
 export default async function CustomersPage() {
-  const customers = await getCustomers()
+  const [customers, orderCounts] = await Promise.all([
+    getCustomers(),
+    getCustomerOrderCounts(),
+  ])
 
   return (
     <div className="w-full">
-      <CustomersClient initialCustomers={customers} />
+      <CustomersList initialCustomers={customers} orderCounts={orderCounts} />
     </div>
   )
 }
