@@ -3,7 +3,7 @@
 import { useActionState, useEffect } from 'react'
 import { signInWithGoogle } from './actions'
 import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-react'
+import { Loader2, ArrowRight } from 'lucide-react'
 import { motion } from 'motion/react'
 
 const googleIcon = (
@@ -43,17 +43,25 @@ export function LoginForm() {
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="relative w-full max-w-sm"
     >
-      {/* Card with glassmorphism */}
-      <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 backdrop-blur-xl shadow-2xl">
-        {/* Subtle inner glow */}
-        <div className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      {/* Premium card with enhanced glassmorphism */}
+      <div className="relative overflow-hidden rounded-2xl border border-primary/10 bg-gradient-to-br from-card/90 via-card/80 to-card/70 backdrop-blur-2xl shadow-2xl">
+        {/* Enhanced gradient glow at top */}
+        <div className="pointer-events-none absolute inset-x-0 -top-px h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+        
+        {/* Subtle corner accent */}
+        <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-primary/5 blur-3xl" />
 
-        <div className="p-8">
-          {/* Logo + Brand */}
-          <div className="mb-8 text-center">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20">
+        <div className="relative p-8 sm:p-10">
+          {/* Logo + Brand — Enhanced hierarchy */}
+          <div className="mb-10 text-center">
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 ring-1 ring-primary/30 shadow-lg"
+            >
               <svg
-                className="h-7 w-7 text-primary"
+                className="h-8 w-8 text-primary"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -65,54 +73,99 @@ export function LoginForm() {
                 <polyline points="10 17 15 12 10 7" />
                 <line x1="15" x2="3" y1="12" y2="12" />
               </svg>
-            </div>
-            <h1 className="text-2xl font-bold tracking-tight text-foreground">
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-3xl font-bold tracking-tight text-foreground"
+            >
               Akakia Manager
-            </h1>
-            <p className="mt-1.5 text-sm text-muted-foreground">
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="mt-2.5 text-sm font-medium text-muted-foreground"
+            >
               Portal manajemen
-            </p>
+            </motion.p>
           </div>
 
-          {/* Error */}
-          <form action={googleAction} className="space-y-6">
+          {/* Form with premium styling */}
+          <form action={googleAction} className="space-y-5">
+            {/* Error alert with smooth animation */}
             {googleState?.error && (
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                className="rounded-lg border border-destructive/20 bg-destructive/10 px-4 py-3 text-sm text-destructive"
+                initial={{ opacity: 0, height: 0, y: -10 }}
+                animate={{ opacity: 1, height: 'auto', y: 0 }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="rounded-lg border border-destructive/30 bg-gradient-to-r from-destructive/10 via-destructive/5 to-transparent px-4 py-3 text-sm text-destructive font-medium"
               >
                 {googleState.error}
               </motion.div>
             )}
 
-            {/* Google Button */}
-            <Button
-              type="submit"
-              formAction={googleAction}
-              formNoValidate
-              variant="outline"
-              disabled={isGooglePending}
-              className="relative h-12 w-full gap-3 overflow-hidden rounded-xl border-border bg-background/50 text-sm font-medium shadow-sm transition-all hover:bg-accent hover:shadow-md active:scale-[0.98]"
+            {/* Premium Google Button */}
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             >
-              {isGooglePending && (
-                <span className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm">
-                  <Loader2 className="h-5 w-5 animate-spin text-primary" />
-                </span>
-              )}
-              {googleIcon}
-              <span className={isGooglePending ? 'invisible' : ''}>
-                Lanjutkan dengan Google
-              </span>
-            </Button>
+              <Button
+                type="submit"
+                formAction={googleAction}
+                formNoValidate
+                disabled={isGooglePending}
+                className="relative h-13 w-full gap-3 overflow-hidden rounded-xl border border-primary/20 bg-gradient-to-r from-primary/95 via-primary to-primary/95 font-medium text-primary-foreground shadow-lg transition-all duration-300 hover:shadow-xl hover:border-primary/40 hover:from-primary hover:via-primary hover:to-primary disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {isGooglePending ? (
+                  <motion.span
+                    className="flex items-center gap-2"
+                    animate={{ opacity: [0.5, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }}
+                  >
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Memproses...
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    className="flex items-center gap-2"
+                    whileHover={{ gap: 4 }}
+                  >
+                    {googleIcon}
+                    <span>Lanjutkan dengan Google</span>
+                    <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </motion.span>
+                )}
+              </Button>
+            </motion.div>
           </form>
         </div>
       </div>
 
-      {/* Footer */}
-      <p className="mt-6 text-center text-xs text-muted-foreground/60">
-        Dengan melanjutkan, Anda menyetujui Ketentuan Layanan dan Kebijakan Privasi kami.
-      </p>
+      {/* Enhanced footer with better visual weight */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="mt-8 text-center space-y-3"
+      >
+        <p className="text-xs text-muted-foreground/70 leading-relaxed">
+          Dengan melanjutkan, Anda menyetujui{' '}
+          <a href="#" className="font-medium text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2">
+            Ketentuan Layanan
+          </a>
+          {' '}dan{' '}
+          <a href="#" className="font-medium text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2">
+            Kebijakan Privasi
+          </a>
+        </p>
+      </motion.div>
     </motion.div>
   )
 }
+
