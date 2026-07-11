@@ -25,7 +25,6 @@ export default function SidebarNav() {
             href={item.href}
             label={item.label}
             icon={item.icon}
-            isActive={pathname === item.href}
           />
         ))}
       </nav>
@@ -35,7 +34,6 @@ export default function SidebarNav() {
           href="/profile"
           label="Profil"
           icon={User}
-          isActive={pathname === '/profile'}
         />
       </div>
     </>
