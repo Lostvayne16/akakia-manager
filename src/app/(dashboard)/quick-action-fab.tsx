@@ -1,52 +1,52 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { Plus, ClipboardList, Receipt, UserPlus } from 'lucide-react'
+import { useQuickCreate } from './dashboard-shell'
 
 const shortcuts = [
   {
     label: 'Pesanan Baru',
-    href: '/orders?new=true',
+    sheet: 'order' as const,
     icon: ClipboardList,
     iconBg: 'bg-primary',
   },
   {
     label: 'Catat Pengeluaran',
-    href: '/expenses?new=true',
+    sheet: 'expense' as const,
     icon: Receipt,
     iconBg: 'bg-rose-500',
   },
   {
     label: 'Tambah Pelanggan',
-    href: '/customers?new=true',
+    sheet: 'customer' as const,
     icon: UserPlus,
     iconBg: 'bg-emerald-500',
   },
-] as const
+]
 
 export function QuickActionFab() {
   const [open, setOpen] = useState(false)
+  const { openOrderSheet, openExpenseSheet, openCustomerSheet } = useQuickCreate()
 
-  function close() {
+  function handleSheet(sheet: 'order' | 'expense' | 'customer') {
     setOpen(false)
+    const actions = { order: openOrderSheet, expense: openExpenseSheet, customer: openCustomerSheet }
+    actions[sheet]()
   }
 
   return (
     <>
-      {/* Backdrop — only rendered when open */}
       {open && (
-        <div className="fixed inset-0 z-40" onClick={close} />
+        <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
       )}
 
-      {/* FAB + pills container */}
       <div
         className="fixed bottom-0 right-0 z-50 flex flex-col items-end md:hidden"
         style={{
           padding: `0 1.25rem calc(env(safe-area-inset-bottom, 0px) + 1.25rem) 0`,
         }}
       >
-        {/* Shortcut pills — expand upward */}
         <div
           className={`mb-3 flex flex-col items-end gap-2 transition-all duration-200 ${
             open
@@ -55,10 +55,9 @@ export function QuickActionFab() {
           }`}
         >
           {shortcuts.map((s) => (
-            <Link
-              key={s.href}
-              href={s.href}
-              onClick={close}
+            <button
+              key={s.sheet}
+              onClick={() => handleSheet(s.sheet)}
               className="flex items-center gap-3 rounded-full border border-border bg-card px-4 py-2.5 shadow-lg transition-colors hover:bg-muted/60"
             >
               <span className="whitespace-nowrap text-sm font-medium text-foreground">
@@ -69,11 +68,10 @@ export function QuickActionFab() {
               >
                 <s.icon className="h-3.5 w-3.5" />
               </span>
-            </Link>
+            </button>
           ))}
         </div>
 
-        {/* Main FAB button */}
         <button
           onClick={() => setOpen((prev) => !prev)}
           className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform duration-200 hover:bg-primary/90 active:scale-95"

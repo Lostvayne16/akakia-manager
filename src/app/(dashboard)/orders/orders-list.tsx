@@ -3,7 +3,6 @@
 import { useState, useMemo, useEffect } from 'react'
 import { getOrderStatus } from '@/lib/order-status'
 import { Search, Plus, PackageOpen } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import OrderCard from '@/components/order-card'
 import CreateOrderSheet from '@/components/create-order-sheet'
 import RecordDpSheet from '@/components/record-dp-sheet'
@@ -49,18 +48,7 @@ export default function OrdersList({ initialOrders, customers }: Props) {
   const [dpOrder, setDpOrder] = useState<Order | null>(null)
   const [paymentOrder, setPaymentOrder] = useState<Order | null>(null)
 
-  // Lacak apakah sheet dibuka lewat FAB (?new=true)
-  const [openedViaFab, setOpenedViaFab] = useState(false)
 
-  const router = useRouter()
-
-  // Auto-open create sheet jika URL memiliki ?new=true
-  useEffect(() => {
-    if (new URLSearchParams(window.location.search).get('new') === 'true') {
-      setCreateOpen(true)
-      setOpenedViaFab(true)
-    }
-  }, [])
 
   // Ambil pending orders dari IndexedDB saat mount
   useEffect(() => {
@@ -119,14 +107,8 @@ export default function OrdersList({ initialOrders, customers }: Props) {
     [pendingOrders, filteredServer],
   )
 
-  // Bottom sheet close callbacks — sync local state after mutations
   function handleCreateClose() {
     setCreateOpen(false)
-    window.history.replaceState(null, '', window.location.pathname)
-    if (openedViaFab) {
-      router.back()
-      return
-    }
     import('@/app/(dashboard)/orders/actions').then((m) =>
       m.getOrders().then(setOrders).catch(() => {}),
     )

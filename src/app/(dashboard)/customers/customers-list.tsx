@@ -2,7 +2,6 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import { Search, Plus, PackageOpen, Eye, EyeOff } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import CustomerCard from '@/components/customer-card'
 import CreateCustomerSheet from '@/components/create-customer-sheet'
@@ -36,18 +35,6 @@ export default function CustomersList({ initialCustomers, orderCounts }: Props) 
   const [createOpen, setCreateOpen] = useState(false)
   const [editCustomer, setEditCustomer] = useState<Customer | null>(null)
 
-  // Lacak apakah sheet dibuka lewat FAB (?new=true)
-  const [openedViaFab, setOpenedViaFab] = useState(false)
-
-  const router = useRouter()
-
-  // Auto-open create sheet jika URL memiliki ?new=true
-  useEffect(() => {
-    if (new URLSearchParams(window.location.search).get('new') === 'true') {
-      setCreateOpen(true)
-      setOpenedViaFab(true)
-    }
-  }, [])
 
   // Ambil pending customers dari IndexedDB saat mount
   useEffect(() => {
@@ -104,11 +91,6 @@ export default function CustomersList({ initialCustomers, orderCounts }: Props) 
 
   function handleCreateClose() {
     setCreateOpen(false)
-    window.history.replaceState(null, '', window.location.pathname)
-    if (openedViaFab) {
-      router.back()
-      return
-    }
     getCustomers(showInactive).then(setCustomers).catch(() => {})
   }
 

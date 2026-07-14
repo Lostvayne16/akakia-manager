@@ -3,6 +3,10 @@
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react'
 import { Toaster } from 'sonner'
 import AppDrawer from '@/components/app-drawer'
+import CreateOrderSheet from '@/components/create-order-sheet'
+import ExpenseSheet from '@/components/expense-sheet'
+import CreateCustomerSheet from '@/components/create-customer-sheet'
+import { getCustomers } from '@/app/(dashboard)/customers/actions'
 
 type DrawerCtx = { open: boolean; toggle: () => void; close: () => void }
 const DrawerContext = createContext<DrawerCtx | null>(null)
@@ -13,6 +17,25 @@ export function useDrawer() {
   return ctx
 }
 
+// --- Quick Create Context (global sheet dari FAB) ---
+type QuickCreateSheet = null | 'order' | 'expense' | 'customer'
+
+type QuickCreateCtx = {
+  openOrderSheet: () => void
+  openExpenseSheet: () => void
+  openCustomerSheet: () => void
+  closeSheet: () => void
+}
+
+const QuickCreateContext = createContext<QuickCreateCtx | null>(null)
+
+export function useQuickCreate() {
+  const ctx = useContext(QuickCreateContext)
+  if (!ctx) throw new Error('useQuickCreate must be inside DashboardShell')
+  return ctx
+}
+// ---
+
 type Props = {
   children: ReactNode
   displayName: string
@@ -20,33 +43,75 @@ type Props = {
 }
 
 export default function DashboardShell({ children, displayName, userEmail }: Props) {
-  const [open, setOpen] = useState(false)
-  const toggle = useCallback(() => setOpen((v) => !v), [])
-  const close = useCallback(() => setOpen(false), [])
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const toggle = useCallback(() => setDrawerOpen((v) => !v), [])
+  const close = useCallback(() => setDrawerOpen(false), [])
+
+  // Global quick create sheet state
+  const [activeSheet, setActiveSheet] = useState<QuickCreateSheet>(null)
+  const [orderCustomers, setOrderCustomers] =
+    useState<Awaited<ReturnType<typeof getCustomers>>>([])
+
+  const openOrderSheet = useCallback(async () => {
+    const data = await getCustomers(false)
+    setOrderCustomers(data)
+    setActiveSheet('order')
+  }, [])
+
+  const openExpenseSheet = useCallback(() => {
+    setActiveSheet('expense')
+  }, [])
+
+  const openCustomerSheet = useCallback(() => {
+    setActiveSheet('customer')
+  }, [])
+
+  const closeSheet = useCallback(() => {
+    setActiveSheet(null)
+  }, [])
 
   return (
-    <DrawerContext.Provider value={{ open, toggle, close }}>
-      <AppDrawer
-        open={open}
-        onClose={close}
-        userName={displayName}
-        userEmail={userEmail}
-      />
+    <DrawerContext.Provider value={{ open: drawerOpen, toggle, close }}>
+      <QuickCreateContext.Provider
+        value={{ openOrderSheet, openExpenseSheet, openCustomerSheet, closeSheet }}
+      >
+        <AppDrawer
+          open={drawerOpen}
+          onClose={close}
+          userName={displayName}
+          userEmail={userEmail}
+        />
 
-      {children}
+        {children}
 
-      <Toaster
-        position="bottom-center"
-        toastOptions={{
-          style: {
-            background: 'var(--card)',
-            color: 'var(--foreground)',
-            border: '1px solid var(--border)',
-            borderRadius: 'var(--radius-lg)',
-            fontSize: '0.875rem',
-          },
-        }}
-      />
+        {/* Global Quick Create Sheets — muncul tanpa navigasi */}
+        <CreateOrderSheet
+          open={activeSheet === 'order'}
+          onClose={closeSheet}
+          customers={orderCustomers}
+        />
+        <ExpenseSheet
+          open={activeSheet === 'expense'}
+          onClose={closeSheet}
+        />
+        <CreateCustomerSheet
+          open={activeSheet === 'customer'}
+          onClose={closeSheet}
+        />
+
+        <Toaster
+          position="bottom-center"
+          toastOptions={{
+            style: {
+              background: 'var(--card)',
+              color: 'var(--foreground)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-lg)',
+              fontSize: '0.875rem',
+            },
+          }}
+        />
+      </QuickCreateContext.Provider>
     </DrawerContext.Provider>
   )
 }
