@@ -25,10 +25,10 @@ export function BarChart({
   const color = barColor || 'var(--chart-1)'
 
   return (
-    <div className={cn('w-full', className)} style={{ height }}>
+    <div className={cn('w-full', className)}>
       <svg
         width="100%"
-        height="100%"
+        height={height}
         viewBox={`0 0 100 ${height}`}
         preserveAspectRatio="none"
         className="overflow-visible"
@@ -61,19 +61,28 @@ export function BarChart({
                 fill={color}
                 className="transition-all duration-700 ease-out"
               />
-              <text
-                x={x + barWidth / 2}
-                y={height + 14}
-                textAnchor="middle"
-                fill="var(--muted-foreground)"
-                fontSize="3.5"
-              >
-                {d.label}
-              </text>
             </g>
           )
         })}
       </svg>
+      {/* Labels — rendered outside SVG to avoid stretch from preserveAspectRatio="none" */}
+      <div className="relative w-full" style={{ height: 20 }}>
+        {data.map((d, i) => {
+          const centerX = gap + i * (barWidth + gap) + barWidth / 2
+          return (
+            <div
+              key={i}
+              className="absolute text-xs text-muted-foreground"
+              style={{
+                left: `${centerX}%`,
+                transform: 'translateX(-50%)',
+              }}
+            >
+              {d.label}
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
