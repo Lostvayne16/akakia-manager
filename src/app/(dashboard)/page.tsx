@@ -1,5 +1,3 @@
-import Link from 'next/link'
-import { Plus, Receipt } from 'lucide-react'
 import {
   getDashboardStats,
   getPiutangTotal,
@@ -12,6 +10,7 @@ import { PiutangCard } from './piutang-card'
 import { StatusBreakdown } from './status-breakdown'
 import { IncomeChart } from './income-chart'
 import { RecentOrdersList } from './recent-orders-list'
+import { QuickActionFab } from './quick-action-fab'
 
 export const dynamic = 'force-dynamic'
 
@@ -57,6 +56,8 @@ export default async function DashboardPage() {
 
       {/* 6. Recent orders */}
       <RecentOrdersList orders={recentOrders} />
+
+      <QuickActionFab />
     </div>
   )
 }
