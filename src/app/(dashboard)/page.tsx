@@ -27,24 +27,6 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6 pb-20 md:pb-0">
-      {/* 1. Quick action buttons */}
-      <div className="flex flex-wrap gap-3">
-        <Link
-          href="/orders"
-          className="flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-        >
-          <Plus className="h-4 w-4" />
-          Pesanan Baru
-        </Link>
-        <Link
-          href="/expenses"
-          className="flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted/40"
-        >
-          <Receipt className="h-4 w-4" />
-          Catat Pengeluaran
-        </Link>
-      </div>
-
       {/* 2. Finance cards */}
       <FinanceCards
         totalPendapatan={stats.totalPendapatan}
