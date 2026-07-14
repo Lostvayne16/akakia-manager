@@ -1,12 +1,6 @@
 export default function Loading() {
   return (
     <div className="animate-pulse space-y-6 pb-20 md:pb-0">
-      {/* Quick action buttons */}
-      <div className="flex flex-wrap gap-3">
-        <div className="h-11 w-36 rounded-xl bg-muted" />
-        <div className="h-11 w-44 rounded-xl bg-muted" />
-      </div>
-
       {/* Finance cards (3) */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {[1, 2, 3].map((i) => (
