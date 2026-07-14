@@ -16,6 +16,6 @@ export const config = {
      * - icon.png, etc.
      * - auth/callback (Supabase OAuth callback - must run before middleware)
      */
-    '/((?!_next/static|_next/image|favicon.ico|manifest\\.json|icon\\.png|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$|/auth/callback(?:/.*)?$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|manifest\\.json|icon\\.png|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$|/auth/callback(?:/.*)?$|\\.well-known(?:/.*)?$).*)',
   ],
 }

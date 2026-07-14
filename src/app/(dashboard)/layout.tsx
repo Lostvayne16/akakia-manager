@@ -5,6 +5,7 @@ import { ThemeToggle } from '@/components/theme-toggle'
 import DashboardShell from './dashboard-shell'
 import DrawerToggle from './drawer-toggle'
 import SidebarNav from './sidebar-nav'
+import PageHeader from './page-header'
 
 export default async function DashboardLayout({
   children,
@@ -49,8 +50,8 @@ export default async function DashboardLayout({
           </div>
 
           <div className="hidden md:flex items-center gap-3">
-            <h1 className="text-lg font-semibold text-foreground">Dashboard</h1>
-          </div>
+              <PageHeader />
+            </div>
 
           <div className="flex items-center gap-3">
             <ThemeToggle />
