@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.akakia.manager",
+    "sha256_cert_fingerprints": [
+      "9B:09:17:56:C9:16:C2:35:CC:10:5C:F5:29:33:74:1A:6E:87:65:53:8F:E4:56:61:80:AE:FE:6A:00:F6:DB:17"
+    ]
+  }
+}]

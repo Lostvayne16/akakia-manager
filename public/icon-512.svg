@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C0D0E"/>
+      <stop offset="100%" stop-color="#1a1b1e"/>
+    </linearGradient>
+    <linearGradient id="ic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5E6AD2"/>
+      <stop offset="100%" stop-color="#9B8EFF"/>
+    </linearGradient>
+    <filter id="glow">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#5E6AD2" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <!-- Background rounded rect (adaptive icon shape) -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <!-- Sofa icon -->
+  <g filter="url(#glow)" transform="translate(256,256)">
+    <!-- Sofa base -->
+    <rect x="-100" y="-10" width="200" height="80" rx="16" fill="url(#ic)" opacity="0.9"/>
+    <!-- Sofa seat -->
+    <rect x="-80" y="0" width="160" height="60" rx="12" fill="#0C0D0E" opacity="0.3"/>
+    <!-- Left arm -->
+    <rect x="-120" y="-40" width="40" height="110" rx="16" fill="url(#ic)" opacity="0.85"/>
+    <!-- Right arm -->
+    <rect x="80" y="-40" width="40" height="110" rx="16" fill="url(#ic)" opacity="0.85"/>
+    <!-- Backrest -->
+    <rect x="-90" y="-70" width="180" height="60" rx="16" fill="url(#ic)" opacity="0.75"/>
+    <!-- Legs -->
+    <rect x="-75" y="65" width="12" height="20" rx="4" fill="url(#ic)" opacity="0.5"/>
+    <rect x="63" y="65" width="12" height="20" rx="4" fill="url(#ic)" opacity="0.5"/>
+    <!-- Pillow left -->
+    <rect x="-30" y="-60" width="50" height="40" rx="10" fill="url(#ic)" opacity="0.4"/>
+    <!-- Pillow right -->
+    <rect x="-20" y="-55" width="60" height="30" rx="10" fill="url(#ic)" opacity="0.2"/>
+  </g>
+</svg>

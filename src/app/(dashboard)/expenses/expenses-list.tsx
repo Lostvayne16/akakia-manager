@@ -6,6 +6,7 @@ import ExpenseCard from '@/components/expense-card'
 import ExpenseSheet from '@/components/expense-sheet'
 import { EXPENSE_CATEGORIES, type ExpenseCategory } from '@/lib/constants'
 import { getCategoryColor } from '@/lib/expense-category'
+import { useRouter } from 'next/navigation'
 import { getExpenses, type Expense } from '@/app/(dashboard)/expenses/actions'
 import { getPendingItems } from '@/lib/offline-db'
 import type { PendingRecord } from '@/lib/offline-db'
@@ -87,10 +88,16 @@ export default function ExpensesList({ initialExpenses }: Props) {
   const [createOpen, setCreateOpen] = useState(false)
   const [editExpense, setEditExpense] = useState<Expense | null>(null)
 
+  // Lacak apakah sheet dibuka lewat FAB (?new=true)
+  const [openedViaFab, setOpenedViaFab] = useState(false)
+
+  const router = useRouter()
+
   // Auto-open create sheet jika URL memiliki ?new=true
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get('new') === 'true') {
       setCreateOpen(true)
+      setOpenedViaFab(true)
     }
   }, [])
 
@@ -362,6 +369,10 @@ export default function ExpensesList({ initialExpenses }: Props) {
         onClose={() => {
           setCreateOpen(false)
           window.history.replaceState(null, '', window.location.pathname)
+          if (openedViaFab) {
+            router.back()
+            return
+          }
           refresh()
         }}
       />
