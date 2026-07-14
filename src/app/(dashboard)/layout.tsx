@@ -65,7 +65,7 @@ export default async function DashboardLayout({
         </header>
 
         {/* Page Content */}
-        <main className="p-4 pb-4 md:p-8">
+        <main className="p-4 pb-4 md:p-8 safe-area-bottom">
           {children}
         </main>
       </div>
