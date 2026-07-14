@@ -7,19 +7,19 @@ import { Plus, ClipboardList, Receipt, UserPlus } from 'lucide-react'
 const shortcuts = [
   {
     label: 'Pesanan Baru',
-    href: '/orders',
+    href: '/orders?new=true',
     icon: ClipboardList,
     iconBg: 'bg-primary',
   },
   {
     label: 'Catat Pengeluaran',
-    href: '/expenses',
+    href: '/expenses?new=true',
     icon: Receipt,
     iconBg: 'bg-rose-500',
   },
   {
     label: 'Tambah Pelanggan',
-    href: '/customers',
+    href: '/customers?new=true',
     icon: UserPlus,
     iconBg: 'bg-emerald-500',
   },

@@ -48,6 +48,13 @@ export default function OrdersList({ initialOrders, customers }: Props) {
   const [dpOrder, setDpOrder] = useState<Order | null>(null)
   const [paymentOrder, setPaymentOrder] = useState<Order | null>(null)
 
+  // Auto-open create sheet jika URL memiliki ?new=true
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('new') === 'true') {
+      setCreateOpen(true)
+    }
+  }, [])
+
   // Ambil pending orders dari IndexedDB saat mount
   useEffect(() => {
     getPendingItems<Record<string, unknown>>('pending_orders').then((items) => {
@@ -108,6 +115,7 @@ export default function OrdersList({ initialOrders, customers }: Props) {
   // Bottom sheet close callbacks — sync local state after mutations
   function handleCreateClose() {
     setCreateOpen(false)
+    window.history.replaceState(null, '', window.location.pathname)
     import('@/app/(dashboard)/orders/actions').then((m) =>
       m.getOrders().then(setOrders).catch(() => {}),
     )

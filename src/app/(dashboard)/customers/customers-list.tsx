@@ -35,6 +35,13 @@ export default function CustomersList({ initialCustomers, orderCounts }: Props) 
   const [createOpen, setCreateOpen] = useState(false)
   const [editCustomer, setEditCustomer] = useState<Customer | null>(null)
 
+  // Auto-open create sheet jika URL memiliki ?new=true
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('new') === 'true') {
+      setCreateOpen(true)
+    }
+  }, [])
+
   // Ambil pending customers dari IndexedDB saat mount
   useEffect(() => {
     getPendingItems<Record<string, unknown>>('pending_customers').then((items) => {
@@ -90,6 +97,7 @@ export default function CustomersList({ initialCustomers, orderCounts }: Props) 
 
   function handleCreateClose() {
     setCreateOpen(false)
+    window.history.replaceState(null, '', window.location.pathname)
     getCustomers(showInactive).then(setCustomers).catch(() => {})
   }
 

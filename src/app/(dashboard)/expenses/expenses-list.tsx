@@ -87,6 +87,13 @@ export default function ExpensesList({ initialExpenses }: Props) {
   const [createOpen, setCreateOpen] = useState(false)
   const [editExpense, setEditExpense] = useState<Expense | null>(null)
 
+  // Auto-open create sheet jika URL memiliki ?new=true
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('new') === 'true') {
+      setCreateOpen(true)
+    }
+  }, [])
+
   // Ambil pending expenses dari IndexedDB saat mount
   useEffect(() => {
     getPendingItems<Record<string, unknown>>('pending_expenses').then((items) => {
@@ -354,6 +361,7 @@ export default function ExpensesList({ initialExpenses }: Props) {
         open={createOpen}
         onClose={() => {
           setCreateOpen(false)
+          window.history.replaceState(null, '', window.location.pathname)
           refresh()
         }}
       />
