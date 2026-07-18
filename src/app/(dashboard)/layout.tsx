@@ -56,10 +56,10 @@ export default async function DashboardLayout({
           <div className="flex items-center gap-3">
             <ThemeToggle />
             <div className="flex items-center gap-2 rounded-full bg-accent px-3 py-1.5">
-              <div className="h-7 w-7 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary">
+              <div className="h-7 w-7 rounded-full bg-accent-foreground/15 flex items-center justify-center text-xs font-bold text-accent-foreground">
                 {displayName.charAt(0).toUpperCase()}
               </div>
-              <span className="hidden text-sm font-medium text-foreground md:block">{displayName}</span>
+              <span className="hidden text-sm font-medium text-accent-foreground md:block">{displayName}</span>
             </div>
           </div>
         </header>

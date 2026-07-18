@@ -45,3 +45,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# agents and developer tools
+.agents/
+.npx-cache/
+graphify-out/
+route_models.py

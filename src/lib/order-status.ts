@@ -30,10 +30,10 @@ type StatusColorSet = {
 export function getStatusColor(status: OrderStatus): StatusColorSet {
   switch (status) {
     case 'Masuk':
-      return { bg: 'bg-neutral-500/10', text: 'text-neutral-400' }
+      return { bg: 'bg-neutral-500/10', text: 'text-hue-neutral' }
     case 'Dikerjakan':
-      return { bg: 'bg-amber-500/10', text: 'text-amber-400' }
+      return { bg: 'bg-amber-500/10', text: 'text-hue-amber' }
     case 'Selesai':
-      return { bg: 'bg-emerald-500/10', text: 'text-emerald-400' }
+      return { bg: 'bg-emerald-500/10', text: 'text-positive' }
   }
 }

@@ -14,9 +14,10 @@ type Props = {
   open: boolean
   onClose: () => void
   customers: Customer[]
+  customersLoading?: boolean
 }
 
-export default function CreateOrderSheet({ open, onClose, customers }: Props) {
+export default function CreateOrderSheet({ open, onClose, customers, customersLoading = false }: Props) {
   const [customerSearch, setCustomerSearch] = useState('')
   const [customerOpen, setCustomerOpen] = useState(false)
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)
@@ -178,7 +179,7 @@ export default function CreateOrderSheet({ open, onClose, customers }: Props) {
           <button
             type="button"
             onClick={() => setCustomerOpen(!customerOpen)}
-            className="flex w-full items-center justify-between rounded-xl border border-input bg-background px-3 py-2.5 text-sm text-left"
+            className="flex w-full cursor-pointer items-center justify-between rounded-xl border border-input bg-background px-3 py-2.5 text-sm text-left"
           >
             <span className={selectedCustomer ? 'text-foreground' : 'text-muted-foreground'}>
               {selectedCustomer ? selectedCustomer.name : 'Pilih pelanggan...'}
@@ -202,7 +203,11 @@ export default function CreateOrderSheet({ open, onClose, customers }: Props) {
               <div className="max-h-44 overflow-y-auto p-1">
                 {activeCustomers.length === 0 ? (
                   <p className="px-3 py-4 text-center text-sm text-muted-foreground">
-                    Tidak ada pelanggan yang bisa dipilih saat offline — pelanggan yang baru dibuat perlu disinkronkan dulu
+                    {customersLoading
+                      ? 'Memuat daftar pelanggan...'
+                      : !online
+                        ? 'Tidak ada pelanggan yang bisa dipilih saat offline — pelanggan yang baru dibuat perlu disinkronkan dulu'
+                        : 'Belum ada pelanggan, tambahkan dulu di menu Pelanggan'}
                   </p>
                 ) : filteredCustomers.length === 0 ? (
                   <p className="px-3 py-4 text-center text-sm text-muted-foreground">
@@ -218,7 +223,7 @@ export default function CreateOrderSheet({ open, onClose, customers }: Props) {
                         setCustomerOpen(false)
                         setCustomerSearch('')
                       }}
-                      className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-accent transition-colors"
+                      className="flex w-full cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-accent transition-colors"
                     >
                       <span className="flex-1 text-left">{c.name}</span>
                       {selectedCustomer?.id === c.id && (
@@ -259,7 +264,7 @@ export default function CreateOrderSheet({ open, onClose, customers }: Props) {
                     setSofaType(s)
                     setShowSofaSuggestions(false)
                   }}
-                  className="w-full px-3 py-2 text-left text-sm text-foreground hover:bg-accent transition-colors first:rounded-t-xl last:rounded-b-xl"
+                  className="w-full cursor-pointer px-3 py-2 text-left text-sm text-foreground hover:bg-accent transition-colors first:rounded-t-xl last:rounded-b-xl"
                 >
                   {s}
                 </button>
@@ -295,7 +300,7 @@ export default function CreateOrderSheet({ open, onClose, customers }: Props) {
                     setServiceType(s)
                     setShowServiceSuggestions(false)
                   }}
-                  className="w-full px-3 py-2 text-left text-sm text-foreground hover:bg-accent transition-colors first:rounded-t-xl last:rounded-b-xl"
+                  className="w-full cursor-pointer px-3 py-2 text-left text-sm text-foreground hover:bg-accent transition-colors first:rounded-t-xl last:rounded-b-xl"
                 >
                   {s}
                 </button>
@@ -321,7 +326,7 @@ export default function CreateOrderSheet({ open, onClose, customers }: Props) {
         <button
           type="submit"
           disabled={loading}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+          className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
         >
           {loading && <Loader2 className="h-4 w-4 animate-spin" />}
           {loading ? 'Menyimpan...' : 'Simpan'}

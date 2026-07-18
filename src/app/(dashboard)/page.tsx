@@ -40,15 +40,18 @@ export default async function DashboardPage() {
       />
 
       {/* 4. Status breakdown */}
-      <div className="rounded-2xl border border-border bg-card p-4">
-        <p className="mb-2 text-xs font-medium text-muted-foreground">
+      <div className="group relative overflow-hidden rounded-2xl border border-border bg-card p-4 transition-all glow-primary-hover">
+        <div className="card-blob bg-secondary" />
+        <p className="relative mb-2 text-xs font-medium text-muted-foreground">
           Status Pesanan
         </p>
-        <StatusBreakdown
-          masuk={statusBreakdown.masuk}
-          dikerjakan={statusBreakdown.dikerjakan}
-          selesai={statusBreakdown.selesai}
-        />
+        <div className="relative">
+          <StatusBreakdown
+            masuk={statusBreakdown.masuk}
+            dikerjakan={statusBreakdown.dikerjakan}
+            selesai={statusBreakdown.selesai}
+          />
+        </div>
       </div>
 
       {/* 5. Income chart */}

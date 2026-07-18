@@ -18,8 +18,9 @@ function formatRupiah(n: number) {
 
 export function RecentOrdersList({ orders }: RecentOrdersListProps) {
   return (
-    <Card className="rounded-2xl border border-border bg-card transition-all hover:shadow-[0_0_20px_-8px_rgba(94,106,210,0.3)]">
-      <CardHeader className="pb-3">
+    <Card className="group relative rounded-2xl border border-border bg-card transition-all glow-primary-hover">
+      <div className="card-blob bg-primary" />
+      <CardHeader className="relative pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base font-semibold text-foreground">
             Pesanan Terbaru
@@ -33,7 +34,7 @@ export function RecentOrdersList({ orders }: RecentOrdersListProps) {
           </Link>
         </div>
       </CardHeader>
-      <CardContent className="p-0">
+      <CardContent className="relative p-0">
         {orders.length === 0 ? (
           <p className="px-6 py-8 text-center text-sm text-muted-foreground">
             Belum ada pesanan

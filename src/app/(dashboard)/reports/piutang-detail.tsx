@@ -21,20 +21,21 @@ export function PiutangDetail({ piutangList }: PiutangDetailProps) {
   const badgeColors = getStatusColor('Dikerjakan')
 
   return (
-    <Card className="rounded-2xl border border-border bg-card transition-all hover:shadow-[0_0_20px_-8px_rgba(94,106,210,0.3)]">
-      <CardHeader className="pb-2">
+    <Card className="group relative rounded-2xl border border-border bg-card transition-all glow-primary-hover">
+      <div className="card-blob bg-amber-500" />
+      <CardHeader className="relative pb-2">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base font-semibold text-foreground">
             Piutang
           </CardTitle>
           {piutangList.length > 0 && (
-            <span className="text-lg font-bold tabular-nums text-foreground">
+            <span className="text-lg font-bold tabular-nums text-foreground font-mono">
               {formatRupiah(totalPiutang)}
             </span>
           )}
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="relative">
         {piutangList.length === 0 ? (
           <p className="py-6 text-center text-sm text-muted-foreground">
             Semua pesanan sudah lunas, tidak ada piutang
@@ -54,7 +55,7 @@ export function PiutangDetail({ piutangList }: PiutangDetailProps) {
                   <p className="truncate text-xs text-muted-foreground">
                     {item.sofaType}
                   </p>
-                  <div className="mt-1 flex gap-3 text-xs text-muted-foreground">
+                  <div className="mt-1 flex gap-3 text-xs text-muted-foreground font-mono">
                     <span>Total: {formatRupiah(item.price)}</span>
                     <span>DP: {formatRupiah(item.dpAmount)}</span>
                   </div>
@@ -62,7 +63,7 @@ export function PiutangDetail({ piutangList }: PiutangDetailProps) {
 
                 {/* Kanan: sisa tagihan — paling ditonjolkan */}
                 <div className="flex flex-col items-end gap-0.5">
-                  <span className="text-sm font-bold tabular-nums text-foreground">
+                  <span className="text-sm font-bold tabular-nums text-foreground font-mono">
                     {formatRupiah(item.sisaTagihan)}
                   </span>
                   <span

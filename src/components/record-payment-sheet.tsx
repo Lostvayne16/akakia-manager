@@ -107,7 +107,7 @@ export default function RecordPaymentSheet({ open, onClose, order }: Props) {
         <button
           type="submit"
           disabled={loading}
-          className={`flex w-full items-center justify-center gap-2 rounded-xl ${statusColor.bg} px-4 py-3 text-sm font-semibold ${statusColor.text} transition-colors hover:opacity-90 disabled:opacity-50 border-0`}
+          className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl ${statusColor.bg} px-4 py-3 text-sm font-semibold ${statusColor.text} transition-colors hover:opacity-90 disabled:opacity-50 border-0`}
         >
           {loading && <Loader2 className="h-4 w-4 animate-spin" />}
           {loading ? 'Menyimpan...' : 'Konfirmasi Pelunasan'}

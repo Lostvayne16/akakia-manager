@@ -2,11 +2,12 @@
 
 import { useState, type FormEvent } from 'react'
 import { toast } from 'sonner'
-import { Loader2 } from 'lucide-react'
+import { Loader2, Contact } from 'lucide-react'
 import BottomSheet from '@/components/bottom-sheet'
 import { createCustomer } from '@/app/(dashboard)/customers/actions'
 import { useOnlineStatus } from '@/lib/use-online-status'
 import { addPendingItem } from '@/lib/offline-db'
+import { useContactPicker } from '@/lib/use-contact-picker'
 
 type Props = {
   open: boolean
@@ -21,6 +22,14 @@ export default function CreateCustomerSheet({ open, onClose }: Props) {
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   const online = useOnlineStatus()
+  const { isSupported: canPickContact, isPicking, pickContact } = useContactPicker()
+
+  async function handlePickContact() {
+    const picked = await pickContact()
+    if (!picked) return
+    if (picked.name) setName(picked.name)
+    if (picked.phone) setPhone(picked.phone)
+  }
 
   function reset() {
     setName('')
@@ -83,6 +92,18 @@ export default function CreateCustomerSheet({ open, onClose }: Props) {
     <BottomSheet open={open} onClose={onClose}>
       <h2 className="mb-5 text-lg font-semibold">Pelanggan Baru</h2>
 
+      {canPickContact && (
+        <button
+          type="button"
+          onClick={handlePickContact}
+          disabled={isPicking}
+          className="mb-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-input bg-background px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted disabled:opacity-50"
+        >
+          <Contact className="h-4 w-4" />
+          {isPicking ? 'Membuka kontak...' : 'Pilih dari Kontak HP'}
+        </button>
+      )}
+
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Name */}
         <div>
@@ -130,7 +151,7 @@ export default function CreateCustomerSheet({ open, onClose }: Props) {
         <button
           type="submit"
           disabled={loading}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+          className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
         >
           {loading && <Loader2 className="h-4 w-4 animate-spin" />}
           {loading ? 'Menyimpan...' : 'Simpan'}

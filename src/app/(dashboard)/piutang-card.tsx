@@ -21,13 +21,14 @@ export function PiutangCard({ totalPiutang, orderCount }: PiutangCardProps) {
 
   return (
     <Card
-      className={`rounded-2xl border bg-card transition-all ${
+      className={`group relative rounded-2xl border bg-card transition-all ${
         hasPiutang
           ? 'border-amber-500/20 hover:shadow-[0_0_20px_-8px_rgba(245,158,11,0.3)]'
-          : 'border-border hover:shadow-[0_0_20px_-8px_rgba(94,106,210,0.3)]'
+          : 'border-border glow-primary-hover'
       }`}
     >
-      <CardContent className="p-5">
+      <div className={`card-blob ${hasPiutang ? 'bg-amber-500' : 'bg-primary'}`} />
+      <CardContent className="relative p-5">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">

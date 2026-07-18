@@ -122,7 +122,7 @@ export function DateFilter({
           <button
             key={p}
             onClick={() => handlePresetChange(p)}
-            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`rounded-lg px-3 py-1.5 cursor-pointer text-xs font-medium transition-colors ${
               preset === p
                 ? 'bg-primary/15 text-primary'
                 : 'border border-border text-muted-foreground hover:text-foreground'

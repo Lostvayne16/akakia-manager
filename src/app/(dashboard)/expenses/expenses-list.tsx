@@ -177,7 +177,7 @@ export default function ExpensesList({ initialExpenses }: Props) {
 
   return (
     <>
-      {/* Header sticky */}
+      {/* Header sticky — cuma judul + search, biar ringkas & nggak nutupin list pas di-scroll di mobile */}
       <div className="sticky top-0 z-10 -mx-4 -mt-4 bg-gradient-to-b from-background via-background to-background/95 px-4 pb-3 pt-4 backdrop-blur-sm sm:static sm:mx-0 sm:mt-0 sm:bg-none sm:px-0 sm:pb-0 sm:pt-0 sm:backdrop-blur-none">
         <div className="flex items-center justify-between gap-4">
           <div>
@@ -205,7 +205,11 @@ export default function ExpensesList({ initialExpenses }: Props) {
             />
           </div>
         </div>
+      </div>
 
+      {/* Filter tanggal & kategori — flow normal, ikut ke-scroll (tidak sticky).
+          Tidak perlu px tambahan: parent <main> di layout.tsx sudah p-4. */}
+      <div>
         {/* Preset tanggal */}
         <div className="mt-3 flex flex-wrap gap-2">
           {(['today', 'week', 'month', 'year', 'custom'] as DatePreset[]).map((p) => (
@@ -251,13 +255,16 @@ export default function ExpensesList({ initialExpenses }: Props) {
               <button
                 key={cat}
                 onClick={() => toggleCategory(cat)}
-                className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                className="rounded-full border px-3 py-1 text-xs font-medium transition-all"
+                style={
                   active
-                    ? `${colors.bg} ${colors.text} border-transparent`
-                    : 'border-border text-muted-foreground hover:text-foreground'
-                }`}
+                    ? { backgroundColor: colors.bg, color: colors.text, borderColor: 'transparent' }
+                    : undefined
+                }
               >
-                {cat}
+                <span className={active ? '' : 'border-border text-muted-foreground hover:text-foreground'}>
+                  {cat}
+                </span>
               </button>
             )
           })}
@@ -285,8 +292,8 @@ export default function ExpensesList({ initialExpenses }: Props) {
                 const colors = getCategoryColor(category)
                 return (
                   <div key={category} className="flex items-center justify-between text-sm">
-                    <span className={`inline-flex items-center gap-1.5 ${colors.text}`}>
-                      <span className={`h-2 w-2 rounded-full ${colors.bg}`} />
+                    <span className="inline-flex items-center gap-1.5" style={{ color: colors.text }}>
+                      <span className="h-2 w-2 rounded-full" style={{ backgroundColor: colors.text }} />
                       {category}
                     </span>
                     <span className="font-medium text-foreground tabular-nums">

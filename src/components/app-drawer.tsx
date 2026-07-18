@@ -59,7 +59,7 @@ export default function AppDrawer({ open, onClose, userName, userEmail }: Props)
           </div>
           <button
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+            className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-accent-foreground"
             aria-label="Tutup menu"
           >
             <X className="h-5 w-5" />

@@ -24,24 +24,25 @@ export function ProfitLossCard({ profitLoss, comparison }: ProfitLossCardProps) 
   const compNonNull = comparison.selisihPersen !== null
 
   return (
-    <Card className="rounded-2xl border border-border bg-card transition-all hover:shadow-[0_0_20px_-8px_rgba(94,106,210,0.3)]">
-      <CardHeader className="pb-2">
+    <Card className="group relative rounded-2xl border border-border bg-card transition-all glow-primary-hover">
+      <div className={`card-blob ${isProfit ? 'bg-primary' : 'bg-secondary'}`} />
+      <CardHeader className="relative pb-2">
         <CardTitle className="text-base font-semibold text-foreground">
           Laba / Rugi
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-5">
+      <CardContent className="relative space-y-5">
         {/* Baris: Pendapatan – Pengeluaran = Untung/Rugi */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Total Pendapatan</span>
-            <span className="text-sm font-semibold text-foreground tabular-nums">
+            <span className="text-sm font-semibold text-foreground tabular-nums font-mono">
               {formatRupiah(profitLoss.totalPendapatan)}
             </span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Total Pengeluaran</span>
-            <span className="text-sm font-semibold text-foreground tabular-nums">
+            <span className="text-sm font-semibold text-foreground tabular-nums font-mono">
               {formatRupiah(profitLoss.totalPengeluaran)}
             </span>
           </div>
@@ -51,8 +52,8 @@ export function ProfitLossCard({ profitLoss, comparison }: ProfitLossCardProps) 
                 {isProfit ? 'Untung' : 'Rugi'}
               </span>
               <span
-                className={`text-lg font-bold tabular-nums ${
-                  isProfit ? 'text-emerald-400' : 'text-rose-400'
+                className={`text-lg font-bold tabular-nums font-mono ${
+                  isProfit ? 'text-positive' : 'text-negative'
                 }`}
               >
                 {formatRupiah(Math.abs(profitLoss.untungRugi))}
@@ -70,8 +71,8 @@ export function ProfitLossCard({ profitLoss, comparison }: ProfitLossCardProps) 
           {compNonNull ? (
             <div className="flex items-center gap-2">
               <span
-                className={`flex items-center gap-1 text-sm font-semibold ${
-                  compPositive ? 'text-emerald-400' : 'text-rose-400'
+                className={`flex items-center gap-1 text-sm font-semibold font-mono ${
+                  compPositive ? 'text-positive' : 'text-negative'
                 }`}
               >
                 {compPositive ? (
@@ -92,10 +93,10 @@ export function ProfitLossCard({ profitLoss, comparison }: ProfitLossCardProps) 
           )}
 
           <div className="mt-1 flex gap-4 text-xs text-muted-foreground">
-            <span>
+            <span className="font-mono">
               Sekarang: {formatRupiah(comparison.periodeSekarang)}
             </span>
-            <span>
+            <span className="font-mono">
               Sebelum: {formatRupiah(comparison.periodeSebelum)}
             </span>
           </div>

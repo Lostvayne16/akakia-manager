@@ -236,9 +236,33 @@ Wajib karena ada offline mode — ID harus bisa di-generate di client (HP) saat 
 
 
 
-\## 6. Fitur yang DIHAPUS dari scope aplikasi ini
+\## 6. Fitur Foto Before/After (aktif — diaktifkan kembali 16 Juli 2026)
 
-\- Upload foto sofa before/after (dan tabel `order\_images` + bucket storage terkait) — \*\*tidak dipakai di app\*\*, mungkin dipakai terpisah untuk website di masa depan. Jangan implementasikan ulang tanpa konfirmasi user.
+Dipakai untuk dokumentasi tiap pesanan (before/after servis), sekaligus mengumpulkan materi foto untuk kebutuhan website company profile di masa depan (owner sempat tertunda bikin web karena kekurangan data foto — sekarang dikumpulkan lewat app ini).
+
+\### order_images
+```sql
+CREATE TABLE order_images (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    order_id UUID REFERENCES orders(id) ON DELETE CASCADE NOT NULL,
+    image_url TEXT NOT NULL,
+    type TEXT NOT NULL CHECK (type IN ('before', 'after')),
+    created_at TIMESTAMPTZ DEFAULT now() NOT NULL
+);
+
+ALTER TABLE order_images ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "authenticated_full_access" ON order_images
+    FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
+-- Tabel baru dari SQL manual butuh GRANT eksplisit, RLS policy saja tidak cukup:
+GRANT SELECT, INSERT, UPDATE, DELETE ON order_images TO authenticated;
+GRANT SELECT ON order_images TO anon;
+```
+
+\### Storage
+Bucket \*\*`order-images`\*\* (strip, bukan underscore — konsisten di semua kode), `public: true` (dipakai `getPublicUrl`), dengan storage policy CRUD untuk `authenticated` + read untuk `anon`.
+
+Path foto: `{order_id}/{type}_{timestamp}.jpg`. Kompresi client-side (canvas, max width 1200px, JPEG 80%) sebelum upload.
 
 
 

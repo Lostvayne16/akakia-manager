@@ -202,7 +202,7 @@ export default function EditOrderSheet({ open, onClose, order, customers }: Prop
                   key={s}
                   type="button"
                   onClick={() => { setSofaType(s); setShowSofaSuggestions(false) }}
-                  className="w-full px-3 py-2 text-left text-sm text-foreground hover:bg-accent transition-colors first:rounded-t-xl last:rounded-b-xl"
+                  className="w-full cursor-pointer px-3 py-2 text-left text-sm text-foreground hover:bg-accent transition-colors first:rounded-t-xl last:rounded-b-xl"
                 >
                   {s}
                 </button>
@@ -233,7 +233,7 @@ export default function EditOrderSheet({ open, onClose, order, customers }: Prop
                   key={s}
                   type="button"
                   onClick={() => { setServiceType(s); setShowServiceSuggestions(false) }}
-                  className="w-full px-3 py-2 text-left text-sm text-foreground hover:bg-accent transition-colors first:rounded-t-xl last:rounded-b-xl"
+                  className="w-full cursor-pointer px-3 py-2 text-left text-sm text-foreground hover:bg-accent transition-colors first:rounded-t-xl last:rounded-b-xl"
                 >
                   {s}
                 </button>
@@ -272,7 +272,7 @@ export default function EditOrderSheet({ open, onClose, order, customers }: Prop
         <button
           type="submit"
           disabled={loading || deleting}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+          className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
         >
           {loading && <Loader2 className="h-4 w-4 animate-spin" />}
           {loading ? 'Menyimpan...' : 'Simpan Perubahan'}
@@ -283,7 +283,7 @@ export default function EditOrderSheet({ open, onClose, order, customers }: Prop
           type="button"
           onClick={handleDelete}
           disabled={loading || deleting}
-          className="flex w-full items-center justify-center gap-2 rounded-xl border border-destructive/30 px-4 py-3 text-sm font-semibold text-destructive transition-colors hover:bg-destructive/10 disabled:opacity-50"
+          className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-destructive/30 px-4 py-3 text-sm font-semibold text-destructive transition-colors hover:bg-destructive/10 disabled:opacity-50"
         >
           {deleting && <Loader2 className="h-4 w-4 animate-spin" />}
           <Trash2 className="h-4 w-4" />

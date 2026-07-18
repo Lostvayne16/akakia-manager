@@ -10,7 +10,7 @@ export default function DrawerToggle() {
     <button
       id="drawer-toggle"
       onClick={toggle}
-      className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors md:hidden"
+      className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors md:hidden"
       aria-label="Buka menu navigasi"
     >
       <Menu className="h-5 w-5" />

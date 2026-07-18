@@ -23,6 +23,10 @@ export default async function OrderDetailPage({ params }: PageProps) {
     .eq('id', id)
     .single()
 
+  // === DEBUG ===
+  console.log('[OrderDetailPage] id:', id)
+  console.log('[OrderDetailPage] error:', error)
+  console.log('[OrderDetailPage] order:', order)
   if (error || !order) {
     notFound()
   }

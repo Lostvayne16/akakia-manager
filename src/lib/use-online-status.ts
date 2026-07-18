@@ -4,17 +4,17 @@ import { useState, useEffect } from 'react'
 
 /**
  * Custom hook untuk deteksi status koneksi browser.
- * Return boolean — true jika online, false jika offline.
+ * Inisialisasi dengan true (SSR-safe) — nilai asli dari navigator.onLine
+ * baru dibaca di useEffect setelah hydration.
  *
- * Gunakan di komponen yang perlu reaksi terhadap perubahan koneksi
- * (misal: disable tombol submit, tampilkan banner offline, trigger sync).
+ * Return boolean — true jika online, false jika offline.
  */
 export function useOnlineStatus(): boolean {
-  const [online, setOnline] = useState(
-    typeof navigator !== 'undefined' ? navigator.onLine : true,
-  )
+  const [online, setOnline] = useState(true) // sama di server maupun initial client render
 
   useEffect(() => {
+    setOnline(navigator.onLine) // baca nilai sebarometer setelah mount
+
     const goOnline = () => setOnline(true)
     const goOffline = () => setOnline(false)
 

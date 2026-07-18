@@ -36,7 +36,7 @@ export async function deleteImage(
 
   // 1. Hapus file fisik dari Supabase Storage
   const { error: storageError } = await supabase.storage
-    .from('order_images')
+    .from('order-images')
     .remove([storagePath])
 
   if (storageError) {

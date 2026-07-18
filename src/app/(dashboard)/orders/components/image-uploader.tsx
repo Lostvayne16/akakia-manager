@@ -121,7 +121,6 @@ export function ImageUploader({ orderId, type, onUploadSuccess }: ImageUploaderP
       <input
         type="file"
         accept="image/*"
-        capture="environment" // Memicu kamera belakang secara otomatis di HP
         ref={fileInputRef}
         onChange={handleFileChange}
         className="hidden"
@@ -131,7 +130,7 @@ export function ImageUploader({ orderId, type, onUploadSuccess }: ImageUploaderP
         type="button"
         onClick={handleButtonClick}
         disabled={isUploading}
-        className="w-full bg-emerald-600 hover:bg-emerald-500 text-white gap-2 py-5 font-semibold"
+        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-2 py-5 font-semibold"
       >
         {isUploading ? (
           <>

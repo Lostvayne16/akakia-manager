@@ -18,7 +18,7 @@ export default function LoginPage() {
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(94, 106, 210, 1) 1px, transparent 1px), linear-gradient(90deg, rgba(94, 106, 210, 1) 1px, transparent 1px)',
+            'linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)',
           backgroundSize: '60px 60px',
         }}
       />

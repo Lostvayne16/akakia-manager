@@ -12,6 +12,17 @@ const withSerwist = withSerwistInit({
 
 const nextConfig: NextConfig = {
   turbopack: {},
+  experimental: {
+    // Client Router Cache untuk halaman dinamis (semua page di sini query
+    // Supabase live per-request, jadi default Next.js men-treat cache-nya
+    // basi seketika — tiap navigasi termasuk tombol Back selalu re-fetch
+    // dari server). Aman dinaikkan karena semua mutasi (create/update/
+    // delete) sudah manggil revalidatePath() eksplisit, jadi cache tetap
+    // otomatis kebuang begitu ada perubahan data, terlepas dari nilai ini.
+    staleTimes: {
+      dynamic: 30,
+    },
+  },
 }
 
 export default withSerwist(nextConfig)

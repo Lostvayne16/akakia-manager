@@ -51,11 +51,14 @@ export default function DashboardShell({ children, displayName, userEmail }: Pro
   const [activeSheet, setActiveSheet] = useState<QuickCreateSheet>(null)
   const [orderCustomers, setOrderCustomers] =
     useState<Awaited<ReturnType<typeof getCustomers>>>([])
+  const [orderCustomersLoading, setOrderCustomersLoading] = useState(false)
 
-  const openOrderSheet = useCallback(async () => {
-    const data = await getCustomers(false)
-    setOrderCustomers(data)
+  const openOrderSheet = useCallback(() => {
     setActiveSheet('order')
+    setOrderCustomersLoading(true)
+    getCustomers(false)
+      .then(setOrderCustomers)
+      .finally(() => setOrderCustomersLoading(false))
   }, [])
 
   const openExpenseSheet = useCallback(() => {
@@ -89,6 +92,7 @@ export default function DashboardShell({ children, displayName, userEmail }: Pro
           open={activeSheet === 'order'}
           onClose={closeSheet}
           customers={orderCustomers}
+          customersLoading={orderCustomersLoading}
         />
         <ExpenseSheet
           open={activeSheet === 'expense'}

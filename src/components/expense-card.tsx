@@ -47,13 +47,16 @@ export default function ExpenseCard({ expense, onEdit }: Props) {
 
   return (
     <div
-      className={`rounded-2xl border border-border bg-card p-4 transition-all hover:shadow-[0_0_20px_-8px_rgba(94,106,210,0.3)] ${
+      className={`relative overflow-hidden rounded-2xl border border-border bg-card p-4 transition-colors ${
         expense._pending
           ? 'cursor-not-allowed opacity-60'
-          : 'cursor-pointer group'
+          : 'cursor-pointer group hover:bg-muted/40'
       }`}
       onClick={handleClick}
     >
+      {!expense._pending && (
+        <span className="absolute inset-y-0 left-0 w-[2px] origin-center scale-y-0 bg-primary transition-transform duration-200 group-hover:scale-y-100" />
+      )}
       {/* Header: date + category badge */}
       <div className="mb-3 flex items-start justify-between gap-2">
         <div className="flex min-w-0 items-center gap-2.5">
@@ -73,7 +76,8 @@ export default function ExpenseCard({ expense, onEdit }: Props) {
             </span>
           )}
           <span
-            className={`inline-flex shrink-0 items-center rounded-full px-2.5 py-0.5 text-[11px] font-medium leading-5 ${colors.bg} ${colors.text}`}
+            className="inline-flex shrink-0 items-center rounded-full px-2.5 py-0.5 text-[11px] font-medium leading-5"
+            style={{ backgroundColor: colors.bg, color: colors.text }}
           >
             {expense.category}
           </span>

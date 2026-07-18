@@ -273,7 +273,7 @@ export default function ExpenseSheet({ open, onClose, expense }: Props) {
         <button
           type="submit"
           disabled={loading || deleting}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+          className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
         >
           {loading && <Loader2 className="h-4 w-4 animate-spin" />}
           {loading
@@ -289,7 +289,7 @@ export default function ExpenseSheet({ open, onClose, expense }: Props) {
             type="button"
             onClick={handleDelete}
             disabled={loading || deleting}
-            className="flex w-full items-center justify-center gap-2 rounded-xl border border-destructive/30 px-4 py-3 text-sm font-semibold text-destructive transition-colors hover:bg-destructive/10 disabled:opacity-50"
+            className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-destructive/30 px-4 py-3 text-sm font-semibold text-destructive transition-colors hover:bg-destructive/10 disabled:opacity-50"
           >
             {deleting ? (
               <Loader2 className="h-4 w-4 animate-spin" />
